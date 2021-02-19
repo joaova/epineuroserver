@@ -5,10 +5,10 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.epineuro.dto.PacienteDTO;
-import org.epineuro.model.Paciente;
-import org.epineuro.request.PacienteRequest;
-import org.epineuro.service.PacienteService;
+import org.epineuro.dto.DiseaseDTO;
+import org.epineuro.model.Disease;
+import org.epineuro.request.DiseaseRequest;
+import org.epineuro.service.DiseaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,44 +25,44 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/paciente")
-public class PacienteController {
+@RequestMapping("/cid")
+public class DiseaseController {
 
 	@Autowired
-	private PacienteService service;
+	private DiseaseService service;
 	
 	@GetMapping
-	public List<PacienteDTO> listar() {
+	public List<DiseaseDTO> listar() {
 		return service.listar();
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> salvar(@RequestBody @Valid PacienteRequest request) {
-		PacienteDTO paciente = service.salvar(request);
+	public ResponseEntity<Void> salvar(@RequestBody @Valid DiseaseRequest request) {
+		DiseaseDTO disease = service.salvar(request);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(paciente.getId()).toUri();
+				.path("/{id}").buildAndExpand(disease.getId()).toUri();
 		
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<PacienteDTO> buscar(@PathVariable Long id) {
-		PacienteDTO Paciente = service.buscar(id);
+	public ResponseEntity<DiseaseDTO> buscar(@PathVariable Long id) {
+		DiseaseDTO disease = service.buscar(id);
 		
-		if (Paciente != null) {
+		if (disease != null) {
 			
-			return ResponseEntity.ok().body(Paciente);
+			return ResponseEntity.ok().body(disease);
 		}
 
 		return ResponseEntity.notFound().build();	
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> atualizar(@RequestBody Paciente obj, @PathVariable Long id) {
+	public ResponseEntity<Void> atualizar(@RequestBody Disease obj, @PathVariable Long id) {
 		
-		PacienteDTO PacienteAtual = service.buscar(id);
+		DiseaseDTO diseaseAtual = service.buscar(id);
 		
-		if (PacienteAtual != null) {
+		if (diseaseAtual != null) {
 
 			obj.setId(id);
 			service.atualizar(obj);
@@ -75,7 +75,7 @@ public class PacienteController {
 	}
 	
 //	@DeleteMapping("/{id}")
-//	public ResponseEntity<Paciente> excluir(@PathVariable Long id) {
+//	public ResponseEntity<Disease> excluir(@PathVariable Long id) {
 //		
 //		service.excluir(id);
 //		return ResponseEntity.noContent().build();

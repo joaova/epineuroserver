@@ -1,6 +1,6 @@
 package org.epineuro.enums;
 
-public enum Sexo {
+public enum Gender {
 	
 	MASCULINO(1, "Masculino"),
 	FEMININO(2, "Feminino"),
@@ -9,7 +9,7 @@ public enum Sexo {
 	private int cod;
 	private String descricao;
 	
-	private Sexo(int cod, String descricao) {
+	private Gender(int cod, String descricao) {
 		this.cod = cod;
 		this.descricao = descricao;
 	}
@@ -22,13 +22,13 @@ public enum Sexo {
 		return descricao;
 	}
 	
-	public static Sexo toEnum(Integer cod) {
+	public static Gender toEnum(Integer cod) {
 		
 		if (cod == null) {
 			return null;
 		}
 		
-		for (Sexo x : Sexo.values()) {
+		for (Gender x : Gender.values()) {
 			if (cod.equals(x.getCod())) {
 				return x;
 			}
