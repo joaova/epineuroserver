@@ -11,8 +11,8 @@ import org.epineuro.model.HeadachePatient;
 import org.epineuro.repository.HeadachePatientRepository;
 import org.epineuro.request.HeadachePatientRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class HeadachePatientService {
@@ -33,7 +33,6 @@ public class HeadachePatientService {
 	@Transactional
 	public HeadachePatientDTO salvar(HeadachePatientRequest request) {
 		HeadachePatient h = mapper.dtoRequestToModel(request);
-		
 		return mapper.modelToDTO(repository.save(h));
 	}
 	

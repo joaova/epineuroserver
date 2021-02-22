@@ -5,9 +5,11 @@ import java.util.Set;
 
 import org.epineuro.model.Disease;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class HeadachePatientDTO {
 	
 	private Long id;

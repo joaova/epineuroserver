@@ -15,10 +15,10 @@ import org.epineuro.enums.Gender;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @MappedSuperclass
-@Data
+@NoArgsConstructor
 public class Patient implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -40,12 +40,103 @@ public class Patient implements Serializable {
 			inverseJoinColumns = @JoinColumn(name = "disease_id"))
 	private Set<Disease> comorbities = new HashSet<Disease>();
 	
-	public Gender getSexo() {
+	public Patient(Long id, Gender gender, String birthState, String birthCity, String currentCity, Date birthDate,
+			Set<Disease> comorbities) {
+		super();
+		this.id = id;
+		this.gender = (gender==null) ? null : gender.getCod();
+		this.birthState = birthState;
+		this.birthCity = birthCity;
+		this.currentCity = currentCity;
+		this.birthDate = birthDate;
+		this.comorbities = comorbities;
+	}
+	
+	
+	
+	public Gender getGender() {
 		return Gender.toEnum(gender);
+	}
+	
+	public Integer getGenderCod() {
+		return this.gender;
 	}
 
 	public void setGender(Gender gender) {
 		this.gender = gender.getCod();
 	}
+
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
+	public String getBirthState() {
+		return birthState;
+	}
+
+
+
+	public void setBirthState(String birthState) {
+		this.birthState = birthState;
+	}
+
+
+
+	public String getBirthCity() {
+		return birthCity;
+	}
+
+
+
+	public void setBirthCity(String birthCity) {
+		this.birthCity = birthCity;
+	}
+
+
+
+	public String getCurrentCity() {
+		return currentCity;
+	}
+
+
+
+	public void setCurrentCity(String currentCity) {
+		this.currentCity = currentCity;
+	}
+
+
+
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
+
+
+	public Set<Disease> getComorbities() {
+		return comorbities;
+	}
+
+
+
+	public void setComorbities(Set<Disease> comorbities) {
+		this.comorbities = comorbities;
+	}
+
 
 }
