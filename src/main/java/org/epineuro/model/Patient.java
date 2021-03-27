@@ -30,7 +30,6 @@ public class Patient implements Serializable {
 	private String birthCity;
 	private String currentCity;
 //	private Integer diseaseGroup;
-//	preciso de uma forma de relacionar as tabelas de headache e patient, talvez com uma chave secundaria
 	
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date birthDate;

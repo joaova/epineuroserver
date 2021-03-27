@@ -3,8 +3,6 @@ package org.epineuro.request;
 import java.util.Date;
 import java.util.Set;
 
-import org.epineuro.model.Disease;
-
 import lombok.Data;
 
 @Data
@@ -15,7 +13,7 @@ public class HeadachePatientRequest {
 	private String birthCity;
 	private String currentCity;
 	private Date birthDate;
-	private Set<Disease> comorbities;
+	private Set<DiseaseRequest> comorbities;
 	private String painPattern;
 
 }

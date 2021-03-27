@@ -46,7 +46,7 @@ public class DiseaseController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<DiseaseDTO> buscar(@PathVariable Long id) {
+	public ResponseEntity<DiseaseDTO> buscar(@PathVariable String id) {
 		DiseaseDTO disease = service.buscar(id);
 		
 		if (disease != null) {
@@ -58,7 +58,7 @@ public class DiseaseController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> atualizar(@RequestBody Disease obj, @PathVariable Long id) {
+	public ResponseEntity<Void> atualizar(@RequestBody Disease obj, @PathVariable String id) {
 		
 		DiseaseDTO diseaseAtual = service.buscar(id);
 		
