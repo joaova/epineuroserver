@@ -5,11 +5,13 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.MappedSuperclass;
 
 import org.epineuro.enums.Gender;
 
@@ -17,7 +19,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.NoArgsConstructor;
 
-@MappedSuperclass
+//@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor
 public class Patient implements Serializable {
 	private static final long serialVersionUID = 1L;
