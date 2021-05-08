@@ -31,9 +31,9 @@ public class DiseaseService {
 					  .collect(Collectors.toList());
 	}
 	
-	public DiseaseDTO buscar(String id ) {
+	public DiseaseDTO buscar(String codigo) {
 		
-		Optional<Disease> disease = repository.findByCid(id);
+		Optional<Disease> disease = repository.findByCid(codigo);
 				
 		if(disease.isPresent()) {
 			return mapper.modelToDTO(disease.get());
@@ -46,7 +46,6 @@ public class DiseaseService {
 	@Transactional
 	public DiseaseDTO salvar(DiseaseRequest request) {
 		Disease d = mapper.dtoRequestToModel(request);
-		
 		return mapper.modelToDTO(repository.save(d));
 	}
 	

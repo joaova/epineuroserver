@@ -2,7 +2,6 @@ package org.epineuro.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -41,7 +40,7 @@ public class Patient implements Serializable {
 	@ManyToMany
 	@JoinTable(name = "patient_disease", joinColumns = @JoinColumn(name = "patient_id"),
 			inverseJoinColumns = @JoinColumn(name = "disease_id"))
-	private Set<Disease> comorbities = new HashSet<Disease>();
+	private Set<Disease> comorbities; //= new HashSet<Disease>();
 	
 	public Patient(Long id, Gender gender, String birthState, String birthCity, String currentCity, Date birthDate,
 			Set<Disease> comorbities) {

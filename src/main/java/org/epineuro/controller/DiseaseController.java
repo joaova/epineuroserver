@@ -6,7 +6,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.epineuro.dto.DiseaseDTO;
-import org.epineuro.model.Disease;
 import org.epineuro.request.DiseaseRequest;
 import org.epineuro.service.DiseaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,7 +38,7 @@ public class DiseaseController {
 	public ResponseEntity<Void> salvar(@RequestBody @Valid DiseaseRequest request) {
 		DiseaseDTO disease = service.salvar(request);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(disease.getId()).toUri();
+				.path("/{id}").buildAndExpand(disease.getCodigo()).toUri();
 		
 		return ResponseEntity.created(uri).build();
 	}
@@ -57,22 +55,22 @@ public class DiseaseController {
 		return ResponseEntity.notFound().build();	
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<Void> atualizar(@RequestBody Disease obj, @PathVariable String id) {
-		
-		DiseaseDTO diseaseAtual = service.buscar(id);
-		
-		if (diseaseAtual != null) {
-
-			obj.setId(id);
-			service.atualizar(obj);
-			
-			return ResponseEntity.noContent().build();
-		}
-
-		return ResponseEntity.notFound().build();
-				
-	}
+//	@PutMapping("/{id}")
+//	public ResponseEntity<Void> atualizar(@RequestBody Disease obj, @PathVariable Long id) {
+//		
+//		DiseaseDTO diseaseAtual = service.buscar(id);
+//		
+//		if (diseaseAtual != null) {
+//
+//			obj.setId(id);
+//			service.atualizar(obj);
+//			
+//			return ResponseEntity.noContent().build();
+//		}
+//
+//		return ResponseEntity.notFound().build();
+//				
+//	}
 	
 //	@DeleteMapping("/{id}")
 //	public ResponseEntity<Disease> excluir(@PathVariable Long id) {

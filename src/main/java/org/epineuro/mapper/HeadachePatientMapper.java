@@ -18,7 +18,6 @@ public class HeadachePatientMapper {
 	private DiseaseMapper mapper;
 	
 	public HeadachePatientDTO modelToDTO(HeadachePatient headache) {
-//		return modelMapper.map(headache, HeadachePatientDTO.class);
 		Set<DiseaseDTO> comorbities = mapper.comorbitiesToDTO(headache.getComorbities());
 		HeadachePatientDTO hpDTO = new HeadachePatientDTO(headache.getId(), headache.getGenderCod(), 
 				headache.getBirthState(), headache.getBirthCity(), headache.getCurrentCity(), 
@@ -28,11 +27,11 @@ public class HeadachePatientMapper {
 	}
 
 	public HeadachePatient dtoRequestToModel(HeadachePatientRequest headacheRequest) {
-//		return modelMapper.map(headacheRequest, HeadachePatient.class);
 		Set<Disease> comorbities = mapper.comorbitiesRequestToModel(headacheRequest.getComorbities());
 		HeadachePatient hp = new HeadachePatient(headacheRequest.getId(), Gender.toEnum(headacheRequest.getGender()), 
 				headacheRequest.getBirthState(), headacheRequest.getBirthCity(), headacheRequest.getCurrentCity(), 
 				headacheRequest.getBirthDate(), comorbities, headacheRequest.getPainPattern());
+		System.out.println(comorbities);
 		return hp;
 	}
 	

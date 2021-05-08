@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class Disease {
 	
 	@Id
-	private String id;
-	private String description;
+	private String codigo;
+	private String nome;
+
 }

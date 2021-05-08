@@ -23,6 +23,7 @@ public class PatientMapper {
 		PatientDTO pDTO = new PatientDTO(patient.getId(), patient.getGenderCod(), 
 				patient.getBirthState(), patient.getBirthCity(), patient.getCurrentCity(), 
 				patient.getBirthDate(), comorbities);
+		System.out.println(pDTO);
 		return pDTO;
 		
 	}
@@ -33,6 +34,7 @@ public class PatientMapper {
 		Patient p = new Patient(patientRequest.getId(), Gender.toEnum(patientRequest.getGender()), 
 				patientRequest.getBirthState(), patientRequest.getBirthCity(), patientRequest.getCurrentCity(), 
 				patientRequest.getBirthDate(), comorbities);
+		System.out.println(p);
 		return p;
 	}
 	
