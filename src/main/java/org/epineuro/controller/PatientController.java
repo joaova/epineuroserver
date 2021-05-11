@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.epineuro.dto.PatientDTO;
+import org.epineuro.model.Patient;
 import org.epineuro.request.DiseaseRequest;
 import org.epineuro.request.PatientRequest;
 import org.epineuro.service.DiseaseService;
@@ -46,7 +47,7 @@ public class PatientController {
 		Set<DiseaseRequest> c = new HashSet<DiseaseRequest>();
 		c = request.getComorbities();
 		c.forEach(dis -> dService.salvar(dis));
-		PatientDTO patient = service.salvar(request);
+		Patient patient = service.salvar(request);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(patient.getId()).toUri();
 		

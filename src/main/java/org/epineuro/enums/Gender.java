@@ -2,9 +2,9 @@ package org.epineuro.enums;
 
 public enum Gender {
 	
-	MASCULINO(1, "Masculino"),
-	FEMININO(2, "Feminino"),
-	NAODECLARADO(3, "Não declarado");
+	MASCULINO(0, "Masculino"),
+	FEMININO(1, "Feminino"),
+	NAODECLARADO(2, "Não declarado");
 	
 	private int cod;
 	private String descricao;

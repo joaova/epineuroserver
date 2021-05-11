@@ -1,7 +1,5 @@
 package org.epineuro.dto;
 
-import java.util.Date;
-import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -12,10 +10,12 @@ public class PatientDTO {
 
 	private Long id;
 	private Integer gender;
-	private String birthState;
-	private String birthCity;
 	private String currentCity;
-	private Date birthDate;
-	private Set<DiseaseDTO> comorbities;
+	private Integer age;
+	private String mainDisease;
+//	private Date birthDate;
+//	private String diseaseGroup;
+//	private String birthState;
+//	private String birthCity;
 	
 }

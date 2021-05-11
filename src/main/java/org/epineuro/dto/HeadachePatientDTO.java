@@ -1,6 +1,6 @@
 package org.epineuro.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ public class HeadachePatientDTO {
 	private String birthState;
 	private String birthCity;
 	private String currentCity;
-	private Date birthDate;
+	private LocalDate birthDate;
 	private Set<DiseaseDTO> comorbities;
 	private String painPattern;
 	

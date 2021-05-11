@@ -30,8 +30,8 @@ public class PatientService {
 	}
 	
 	@Transactional
-	public PatientDTO salvar(PatientRequest request) {
+	public Patient salvar(PatientRequest request) {
 		Patient p = mapper.dtoRequestToModel(request);
-		return mapper.modelToDTO(repository.save(p));
+		return repository.save(p);
 	}
 }

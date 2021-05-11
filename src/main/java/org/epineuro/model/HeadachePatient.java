@@ -1,7 +1,7 @@
 package org.epineuro.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -19,7 +19,7 @@ public class HeadachePatient extends Patient implements Serializable {
 	
 
 	public HeadachePatient(Long id, Gender gender, String birthState, String birthCity, String currentCity,
-			Date birthDate, Set<Disease> comorbities, String painPattern) {
+			LocalDate birthDate, Set<Disease> comorbities, String painPattern) {
 		super(id, gender, birthState, birthCity, currentCity, birthDate, comorbities);
 		this.painPattern = painPattern;
 	}

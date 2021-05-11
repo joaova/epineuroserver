@@ -1,6 +1,6 @@
 package org.epineuro.request;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 import lombok.Data;
@@ -12,7 +12,7 @@ public class HeadachePatientRequest {
 	private String birthState;
 	private String birthCity;
 	private String currentCity;
-	private Date birthDate;
+	private LocalDate birthDate;
 	private Set<DiseaseRequest> comorbities;
 	private String painPattern;
 

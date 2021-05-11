@@ -1,7 +1,7 @@
 package org.epineuro.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -32,17 +32,19 @@ public class Patient implements Serializable {
 	private String birthState;
 	private String birthCity;
 	private String currentCity;
+	
+	// Fazer igual Sexo (enum)
 //	private Integer diseaseGroup;
 	
 	@JsonFormat(pattern="dd/MM/yyyy")
-	private Date birthDate;
+	private LocalDate birthDate;
 	
 	@ManyToMany
 	@JoinTable(name = "patient_disease", joinColumns = @JoinColumn(name = "patient_id"),
 			inverseJoinColumns = @JoinColumn(name = "disease_id"))
 	private Set<Disease> comorbities; //= new HashSet<Disease>();
 	
-	public Patient(Long id, Gender gender, String birthState, String birthCity, String currentCity, Date birthDate,
+	public Patient(Long id, Gender gender, String birthState, String birthCity, String currentCity, LocalDate birthDate,
 			Set<Disease> comorbities) {
 		super();
 		this.id = id;
@@ -118,13 +120,13 @@ public class Patient implements Serializable {
 
 
 
-	public Date getBirthDate() {
+	public LocalDate getBirthDate() {
 		return birthDate;
 	}
 
 
 
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -139,6 +141,5 @@ public class Patient implements Serializable {
 	public void setComorbities(Set<Disease> comorbities) {
 		this.comorbities = comorbities;
 	}
-
 
 }
