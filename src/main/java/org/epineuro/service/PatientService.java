@@ -11,6 +11,7 @@ import org.epineuro.model.Patient;
 import org.epineuro.repository.PatientRepository;
 import org.epineuro.request.PatientRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,5 +34,13 @@ public class PatientService {
 	public Patient salvar(PatientRequest request) {
 		Patient p = mapper.dtoRequestToModel(request);
 		return repository.save(p);
+	}
+
+	@Transactional
+	public ResponseEntity<?> deletePatient(Long id) {
+		
+		repository.deleteById(id);
+
+		return ResponseEntity.noContent().build();
 	}
 }
