@@ -36,5 +36,24 @@ public class HeadachePatientService {
 		return mapper.modelToDTO(repository.save(h));
 	}
 	
-	
+	@Transactional
+	public HeadachePatientDTO edit(HeadachePatientRequest newPatient, Long id) {
+		HeadachePatient hPatient = mapper.dtoRequestToModel(newPatient);
+		return mapper.modelToDTO(repository.findById(id)
+			.map(patient -> {
+				patient.setGender(hPatient.getGender());
+				patient.setBirthState(hPatient.getBirthState());
+				patient.setBirthCity(hPatient.getBirthCity());
+				patient.setCurrentCity(hPatient.getCurrentCity());
+				patient.setBirthDate(hPatient.getBirthDate());
+				patient.setComorbities(hPatient.getComorbities());
+				return repository.save(patient);
+			})
+			.orElseGet(() -> {
+				newPatient.setId(id);
+
+				return repository.save(hPatient);
+			}));
+	}
+
 }
