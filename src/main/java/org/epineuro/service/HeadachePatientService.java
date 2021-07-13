@@ -1,6 +1,7 @@
 package org.epineuro.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -29,6 +30,18 @@ public class HeadachePatientService {
 					  .map(p -> mapper.modelToDTO(p))
 					  .collect(Collectors.toList());
 	}
+
+	public HeadachePatientDTO search(Long id) {
+		Optional<HeadachePatient> hP = repository.findById(id);
+
+		if (hP.isPresent()) {
+			return mapper.modelToDTO(hP.get());
+		}
+
+		return null;
+		
+	}
+					  
 	
 	@Transactional
 	public HeadachePatientDTO salvar(HeadachePatientRequest request) {

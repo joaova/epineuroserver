@@ -41,6 +41,17 @@ public class HeadachePatientController {
 	public List<HeadachePatientDTO> listar() {
 		return service.listar();
 	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<HeadachePatientDTO> getHPatientById(@PathVariable Long id) {
+		HeadachePatientDTO hPDTO = service.search(id);
+
+		if (hPDTO != null) {
+			return ResponseEntity.ok().body(hPDTO);
+		}
+
+		return ResponseEntity.notFound().build();
+	}
 	
 	@PostMapping
 	public ResponseEntity<Void> salvar(@RequestBody @Valid HeadachePatientRequest request) {
