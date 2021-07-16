@@ -13,6 +13,7 @@ public class HeadachePatientRequest {
 	private String birthCity;
 	private String currentCity;
 	private LocalDate birthDate;
+	private Integer diseaseGroup;
 	private Set<DiseaseRequest> comorbities;
 	private String painPattern;
 

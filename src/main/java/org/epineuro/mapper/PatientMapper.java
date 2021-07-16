@@ -5,19 +5,19 @@ import java.time.Period;
 import java.util.Set;
 
 import org.epineuro.dto.PatientDTO;
+import org.epineuro.enums.DiseaseGroup;
 import org.epineuro.enums.Gender;
 import org.epineuro.model.Disease;
 import org.epineuro.model.Patient;
 import org.epineuro.request.PatientRequest;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PatientMapper {
 
-	@Autowired
-	private ModelMapper modelMapper;
+	// @Autowired
+	// private ModelMapper modelMapper;
 	
 	@Autowired
 	private DiseaseMapper mapper;
@@ -37,10 +37,10 @@ public class PatientMapper {
 //	}
 	
 	public PatientDTO modelToDTO(Patient patient) {
-		String mainDisease = patient.getComorbities().iterator().next().getNome();
+		// String mainDisease = patient.getComorbities().iterator().next().getNome();
 		
 		PatientDTO pDTO = new PatientDTO(patient.getId(), patient.getGenderCod(), 
-				patient.getCurrentCity(), ageCalc(patient.getBirthDate(), LocalDate.now()), mainDisease);
+				patient.getCurrentCity(), ageCalc(patient.getBirthDate(), LocalDate.now()), patient.getDiseaseGroup());
 		System.out.println(pDTO);
 		return pDTO;
 		
@@ -52,7 +52,7 @@ public class PatientMapper {
 		Set<Disease> comorbities = mapper.comorbitiesRequestToModel(patientRequest.getComorbities());
 		Patient p = new Patient(patientRequest.getId(), Gender.toEnum(patientRequest.getGender()), 
 				patientRequest.getBirthState(), patientRequest.getBirthCity(), patientRequest.getCurrentCity(), 
-				patientRequest.getBirthDate(), comorbities);
+				patientRequest.getBirthDate(), DiseaseGroup.toEnum(patientRequest.getDiseaseGroup()) ,comorbities);
 		System.out.println(p);
 		return p;
 	}

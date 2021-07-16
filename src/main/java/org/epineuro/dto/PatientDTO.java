@@ -1,5 +1,7 @@
 package org.epineuro.dto;
 
+import org.epineuro.enums.DiseaseGroup;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -12,7 +14,7 @@ public class PatientDTO {
 	private Integer gender;
 	private String currentCity;
 	private Integer age;
-	private String mainDisease;
+	private DiseaseGroup diseaseGroup;
 //	private Date birthDate;
 //	private String diseaseGroup;
 //	private String birthState;

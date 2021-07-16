@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import org.epineuro.enums.DiseaseGroup;
 import org.epineuro.enums.Gender;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -33,8 +34,7 @@ public class Patient implements Serializable {
 	private String birthCity;
 	private String currentCity;
 	
-	// Fazer igual Sexo (enum)
-//	private Integer diseaseGroup;
+	private Integer diseaseGroup;
 	
 	@JsonFormat(pattern="dd/MM/yyyy")
 	private LocalDate birthDate;
@@ -45,7 +45,7 @@ public class Patient implements Serializable {
 	private Set<Disease> comorbities; //= new HashSet<Disease>();
 	
 	public Patient(Long id, Gender gender, String birthState, String birthCity, String currentCity, LocalDate birthDate,
-			Set<Disease> comorbities) {
+	DiseaseGroup diseaseGroup, Set<Disease> comorbities) {
 		super();
 		this.id = id;
 		this.gender = (gender==null) ? null : gender.getCod();
@@ -53,6 +53,7 @@ public class Patient implements Serializable {
 		this.birthCity = birthCity;
 		this.currentCity = currentCity;
 		this.birthDate = birthDate;
+		this.diseaseGroup = (diseaseGroup==null) ? null : diseaseGroup.getCod();
 		this.comorbities = comorbities;
 	}
 	
@@ -70,7 +71,17 @@ public class Patient implements Serializable {
 		this.gender = gender.getCod();
 	}
 
+	public DiseaseGroup getDiseaseGroup() {
+		return DiseaseGroup.toEnum(diseaseGroup);
+	}
+	
+	public Integer getDiseaseGroupCod() {
+		return this.diseaseGroup;
+	}
 
+	public void setDiseaseGroup(DiseaseGroup disG) {
+		this.diseaseGroup = disG.getCod();
+	}
 
 	public Long getId() {
 		return id;
