@@ -16,6 +16,7 @@ public class HeadachePatientDTO {
 	private String birthCity;
 	private String currentCity;
 	private LocalDate birthDate;
+	private Integer diseaseGroup;
 	private Set<DiseaseDTO> comorbities;
 	private String painPattern;
 	

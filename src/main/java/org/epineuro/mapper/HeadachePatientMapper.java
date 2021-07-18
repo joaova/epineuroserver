@@ -22,7 +22,7 @@ public class HeadachePatientMapper {
 		Set<DiseaseDTO> comorbities = mapper.comorbitiesToDTO(headache.getComorbities());
 		HeadachePatientDTO hpDTO = new HeadachePatientDTO(headache.getId(), headache.getGenderCod(), 
 				headache.getBirthState(), headache.getBirthCity(), headache.getCurrentCity(), 
-				headache.getBirthDate(), comorbities, headache.getPainPattern());
+				headache.getBirthDate(), headache.getDiseaseGroupCod(), comorbities, headache.getPainPattern());
 		return hpDTO;
 		
 	}
