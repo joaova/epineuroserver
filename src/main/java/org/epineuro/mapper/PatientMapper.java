@@ -40,7 +40,7 @@ public class PatientMapper {
 		// String mainDisease = patient.getComorbities().iterator().next().getNome();
 		
 		PatientDTO pDTO = new PatientDTO(patient.getId(), patient.getGenderCod(), 
-				patient.getCurrentCity(), ageCalc(patient.getBirthDate(), LocalDate.now()), patient.getDiseaseGroup());
+				patient.getCurrentCity(), ageCalc(patient.getBirthDate(), LocalDate.now()), patient.getDiseaseGroupCod());
 		System.out.println(pDTO);
 		return pDTO;
 		

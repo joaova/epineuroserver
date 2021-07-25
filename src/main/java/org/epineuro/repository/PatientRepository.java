@@ -7,4 +7,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Long>{
 
+    //TODO
+    // @Query("from PatientDTO p where ()")
+    // List<PatientDTO> findAll();
+
 }

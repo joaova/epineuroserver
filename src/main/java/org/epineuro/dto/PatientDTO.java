@@ -14,7 +14,7 @@ public class PatientDTO {
 	private Integer gender;
 	private String currentCity;
 	private Integer age;
-	private DiseaseGroup diseaseGroup;
+	private Integer diseaseGroup;
 //	private Date birthDate;
 //	private String diseaseGroup;
 //	private String birthState;

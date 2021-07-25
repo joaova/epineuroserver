@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.epineuro.dto.PatientDTO;
+import org.epineuro.exception.PatientNotFoundException;
 import org.epineuro.mapper.PatientMapper;
 import org.epineuro.model.Patient;
 import org.epineuro.repository.PatientRepository;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PatientService {
-	
+	 
 	@Autowired 
 	private PatientRepository repository;
 	                                     
@@ -30,6 +31,12 @@ public class PatientService {
 					  .collect(Collectors.toList());
 	}
 	
+	public PatientDTO searchById(Long id) {
+		return repository.findById(id)
+			.map(p -> mapper.modelToDTO(p))
+			.orElseThrow(() -> new PatientNotFoundException(id));
+	}
+
 	@Transactional
 	public Patient salvar(PatientRequest request) {
 		Patient p = mapper.dtoRequestToModel(request);
