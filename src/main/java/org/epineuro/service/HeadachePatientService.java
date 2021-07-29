@@ -12,6 +12,9 @@ import org.epineuro.model.HeadachePatient;
 import org.epineuro.repository.HeadachePatientRepository;
 import org.epineuro.request.HeadachePatientRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -24,8 +27,11 @@ public class HeadachePatientService {
 	@Autowired
 	private HeadachePatientMapper mapper;
 	
-	public List<HeadachePatientDTO> listar() {
-		List<HeadachePatient> headache = repository.findAll();
+	public List<HeadachePatientDTO> listar(Integer pageSize) {
+
+    	Pageable firstPageWithFiveElements = PageRequest.of(0, pageSize);
+
+		Page<HeadachePatient> headache =  repository.findAll(firstPageWithFiveElements);
 		return headache.stream()
 					  .map(p -> mapper.modelToDTO(p))
 					  .collect(Collectors.toList());

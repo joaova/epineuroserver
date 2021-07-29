@@ -12,6 +12,9 @@ import org.epineuro.model.Patient;
 import org.epineuro.repository.PatientRepository;
 import org.epineuro.request.PatientRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +27,16 @@ public class PatientService {
 	@Autowired
 	private PatientMapper mapper;
 	
-	public List<PatientDTO> listar() {
+	public List<PatientDTO> listByPage(Integer pageSize) {
+		Pageable firstPageWithFiveElements = PageRequest.of(0, pageSize);
+
+		Page<Patient> patient =  repository.findAll(firstPageWithFiveElements);
+		return patient.stream()
+					  .map(p -> mapper.modelToDTO(p))
+					  .collect(Collectors.toList());
+	}
+
+	public List<PatientDTO> list() {
 		List<Patient> patient = repository.findAll();
 		return patient.stream()
 					  .map(p -> mapper.modelToDTO(p))

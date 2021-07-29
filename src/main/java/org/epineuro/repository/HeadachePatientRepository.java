@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HeadachePatientRepository extends JpaRepository<HeadachePatient, Long>{
-
+    
 }

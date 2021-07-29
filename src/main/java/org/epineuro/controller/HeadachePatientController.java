@@ -37,12 +37,12 @@ public class HeadachePatientController {
 	@Autowired
 	private DiseaseService dService;
 	
-	@GetMapping
-	public List<HeadachePatientDTO> listar() {
-		return service.listar();
+	@GetMapping("/pagination/{pageSize}")
+	public List<HeadachePatientDTO> listar(@PathVariable Integer pageSize) {
+		return service.listar(pageSize);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/{pageSize}/{id}")
 	public ResponseEntity<HeadachePatientDTO> getHPatientById(@PathVariable Long id) {
 		HeadachePatientDTO hPDTO = service.search(id);
 

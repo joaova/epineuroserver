@@ -8,7 +8,6 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.epineuro.dto.PatientDTO;
-import org.epineuro.filter.PatientFilter;
 import org.epineuro.model.Patient;
 import org.epineuro.request.DiseaseRequest;
 import org.epineuro.request.PatientRequest;
@@ -40,9 +39,14 @@ public class PatientController {
 	@Autowired
 	private DiseaseService dService;
 	
+	@GetMapping("/pagination/{pageSize}")
+	public List<PatientDTO> listByPage(@PathVariable Integer pageSize) {
+		return service.listByPage(pageSize);
+	}
+
 	@GetMapping
-	public List<PatientDTO> listar(PatientFilter filter) {
-		return service.listar();
+	public List<PatientDTO> list() {
+		return service.list();
 	}
 
 	@GetMapping("/{id}")
