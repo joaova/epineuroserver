@@ -27,8 +27,8 @@ public class PatientService {
 	@Autowired
 	private PatientMapper mapper;
 	
-	public List<PatientDTO> listByPage(Integer pageSize) {
-		Pageable firstPageWithFiveElements = PageRequest.of(0, pageSize);
+	public List<PatientDTO> listByPage(Integer page, Integer pageSize) {
+		Pageable firstPageWithFiveElements = PageRequest.of(page, pageSize);
 
 		Page<Patient> patient =  repository.findAll(firstPageWithFiveElements);
 		return patient.stream()

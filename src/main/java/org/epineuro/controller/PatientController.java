@@ -39,9 +39,9 @@ public class PatientController {
 	@Autowired
 	private DiseaseService dService;
 	
-	@GetMapping("/pagination/{pageSize}")
-	public List<PatientDTO> listByPage(@PathVariable Integer pageSize) {
-		return service.listByPage(pageSize);
+	@GetMapping("/pagination/{page}/{pageSize}")
+	public List<PatientDTO> listByPage(@PathVariable Integer page, @PathVariable Integer pageSize) {
+		return service.listByPage(page, pageSize);
 	}
 
 	@GetMapping
