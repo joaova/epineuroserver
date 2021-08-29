@@ -36,13 +36,13 @@ public class DrugsController {
 	public ResponseEntity<Void> salvar(@RequestBody @Valid DrugsRequest request) {
 		DrugsDTO drug = service.salvar(request);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(drug.getId()).toUri();
+				.path("/{id}").buildAndExpand(drug.getName()).toUri();
 		
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<DrugsDTO> buscar(@PathVariable Long id) {
+	public ResponseEntity<DrugsDTO> buscar(@PathVariable String id) {
 		DrugsDTO drug = service.buscar(id);
 		
 		if (drug != null) {

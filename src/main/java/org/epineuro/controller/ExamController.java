@@ -36,13 +36,13 @@ public class ExamController {
 	public ResponseEntity<Void> salvar(@RequestBody @Valid ExamRequest request) {
 		ExamDTO exam = service.salvar(request);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(exam.getId()).toUri();
+				.path("/{id}").buildAndExpand(exam.getName()).toUri();
 		
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<ExamDTO> buscar(@PathVariable Long id) {
+	public ResponseEntity<ExamDTO> buscar(@PathVariable String id) {
 		ExamDTO exam = service.buscar(id);
 		
 		if (exam != null) {

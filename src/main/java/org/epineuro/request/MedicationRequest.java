@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class MedicationRequest {
-    private Long id;
+	private Long id;
 	private String name;
 	private String dailyDosage;
 }

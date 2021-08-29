@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExamDTO {
-    private Long id;
 	private String name;
 	private LocalDate examDate;
 }

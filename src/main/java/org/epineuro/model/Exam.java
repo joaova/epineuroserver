@@ -16,8 +16,6 @@ import lombok.Data;
 public class Exam {
 	
 	@Id
-	private Long id;
-
 	private String name;
 
 	@JsonFormat(pattern = "dd/MM/yyyy")

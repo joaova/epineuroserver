@@ -33,7 +33,7 @@ public class DiseaseService {
 	
 	public DiseaseDTO buscar(String codigo) {
 		
-		Optional<Disease> disease = repository.findByCid(codigo);
+		Optional<Disease> disease = repository.findById(codigo);
 				
 		if(disease.isPresent()) {
 			return mapper.modelToDTO(disease.get());
@@ -46,6 +46,13 @@ public class DiseaseService {
 	@Transactional
 	public DiseaseDTO salvar(DiseaseRequest request) {
 		Disease d = mapper.dtoRequestToModel(request);
+
+		Optional<Disease> disease = repository.findById(d.getCodigo());
+				
+		if(disease.isPresent()) {
+			return mapper.modelToDTO(disease.get());
+		}
+
 		return mapper.modelToDTO(repository.save(d));
 	}
 	

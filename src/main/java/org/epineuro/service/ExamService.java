@@ -31,7 +31,7 @@ public class ExamService {
 					  .collect(Collectors.toList());
 	}
 	
-	public ExamDTO buscar(Long id) {
+	public ExamDTO buscar(String id) {
 		
 		Optional<Exam> exam = repository.findById(id);
 				
@@ -46,6 +46,13 @@ public class ExamService {
 	@Transactional
 	public ExamDTO salvar(ExamRequest request) {
 		Exam e = mapper.dtoRequestToModel(request);
+
+		Optional<Exam> exam = repository.findById(e.getName());
+				
+		if(exam.isPresent()) {
+			return mapper.modelToDTO(exam.get());
+		}
+
 		return mapper.modelToDTO(repository.save(e));
 	}
 	
