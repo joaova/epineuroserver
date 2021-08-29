@@ -42,7 +42,7 @@ public class MedicationController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<MedicationDTO> buscar(@PathVariable Long id) {
+	public ResponseEntity<MedicationDTO> buscar(@PathVariable String id) {
 		MedicationDTO med = service.buscar(id);
 		
 		if (med != null) {

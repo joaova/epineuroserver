@@ -11,5 +11,4 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ExamDTO {
 	private String name;
-	private LocalDate examDate;
 }

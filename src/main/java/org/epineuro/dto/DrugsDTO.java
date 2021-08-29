@@ -9,5 +9,4 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DrugsDTO {
     private String name;
-    private String drugGroup;
 }

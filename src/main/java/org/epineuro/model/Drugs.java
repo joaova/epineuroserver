@@ -17,7 +17,5 @@ public class Drugs {
     
     @Id
     private String name;
-    @NotNull
-    private String drugGroup;
 
 }
