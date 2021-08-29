@@ -10,8 +10,14 @@ import javax.validation.Valid;
 import org.epineuro.dto.PatientDTO;
 import org.epineuro.model.Patient;
 import org.epineuro.request.DiseaseRequest;
+import org.epineuro.request.DrugsRequest;
+import org.epineuro.request.ExamRequest;
+import org.epineuro.request.MedicationRequest;
 import org.epineuro.request.PatientRequest;
 import org.epineuro.service.DiseaseService;
+import org.epineuro.service.DrugService;
+import org.epineuro.service.ExamService;
+import org.epineuro.service.MedicationService;
 import org.epineuro.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +44,15 @@ public class PatientController {
 	
 	@Autowired
 	private DiseaseService dService;
+
+	@Autowired
+	private DrugService drugsService;
+
+	@Autowired
+	private MedicationService medService;
+
+	@Autowired
+	private ExamService exService;
 	
 	@GetMapping("/pagination/{page}/{pageSize}")
 	public List<PatientDTO> listByPage(@PathVariable Integer page, @PathVariable Integer pageSize) {
@@ -59,6 +74,23 @@ public class PatientController {
 		Set<DiseaseRequest> c = new HashSet<DiseaseRequest>();
 		c = request.getComorbities();
 		c.forEach(dis -> dService.salvar(dis));
+
+		Set<DrugsRequest> dru = new HashSet<DrugsRequest>();
+		dru = request.getDrugs();
+		dru.forEach(dis -> drugsService.salvar(dis));
+
+		Set<DiseaseRequest> familyC = new HashSet<DiseaseRequest>();
+		familyC = request.getFirstDegreeRelative();
+		familyC.forEach(dis -> dService.salvar(dis));
+
+		Set<ExamRequest> ex = new HashSet<ExamRequest>();
+		ex = request.getExams();
+		ex.forEach(dis -> exService.salvar(dis));
+
+		Set<MedicationRequest> med = new HashSet<MedicationRequest>();
+		med = request.getMedications();
+		med.forEach(dis -> medService.salvar(dis));	
+
 		Patient patient = service.salvar(request);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(patient.getId()).toUri();

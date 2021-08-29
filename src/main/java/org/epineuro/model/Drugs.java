@@ -12,11 +12,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Disease {
-	
-	@Id
-	private String codigo;
+public class Drugs {
+    
+    @Id
+    private Long id;
 
-	private String nome;
+    private String name;
+    private String drugGroup;
 
 }

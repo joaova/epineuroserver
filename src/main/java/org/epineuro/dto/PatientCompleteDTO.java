@@ -1,13 +1,15 @@
-package org.epineuro.request;
+package org.epineuro.dto;
 
 import java.time.LocalDate;
 import java.util.Set;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-public class PatientRequest {
-
-	private Long id;
+@AllArgsConstructor
+public class PatientCompleteDTO {
+    private Long id;
 	private Integer gender;
 	private Integer color;
 	private Integer civilState;
@@ -22,15 +24,13 @@ public class PatientRequest {
 	private LocalDate endOutpatientFollowUp;
 	private LocalDate dischargeDate;
 	private Integer diseaseGroup;
-	private Set<DiseaseRequest> comorbities;
+	private Set<DiseaseDTO> comorbities;
 	private Double bmi;
 	private Integer smoking;
 	private Integer alcoholism;
-	private Set<DrugsRequest> drugs;
+	private Set<DrugsDTO> drugs;
 	private Integer previousNeurosurgery;
-	private Set<DiseaseRequest> firstDegreeRelative;
-	private Set<ExamRequest> exams;
-	private Set<MedicationRequest> medications;
-
+	private Set<DiseaseDTO> firstDegreeRelative;
+	private Set<ExamDTO> CNSEvaluation;
+	private Set<MedicationDTO> medications;
 }
- 

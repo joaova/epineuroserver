@@ -5,13 +5,12 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.epineuro.dto.DiseaseDTO;
-import org.epineuro.request.DiseaseRequest;
-import org.epineuro.service.DiseaseService;
+import org.epineuro.dto.MedicationDTO;
+import org.epineuro.request.MedicationRequest;
+import org.epineuro.service.MedicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-//import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,36 +19,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-
 @CrossOrigin
 @RestController
-@RequestMapping("/cid")
-public class DiseaseController {
-
-	@Autowired
-	private DiseaseService service;
-	
-	@GetMapping
-	public List<DiseaseDTO> listar() {
+@RequestMapping("/medications")
+public class MedicationController {
+    
+    @Autowired
+    private MedicationService service;
+    
+    @GetMapping
+	public List<MedicationDTO> listar() {
 		return service.listar();
 	}
-	 
+	
 	@PostMapping
-	public ResponseEntity<Void> salvar(@RequestBody @Valid DiseaseRequest request) {
-		DiseaseDTO disease = service.salvar(request);
+	public ResponseEntity<Void> salvar(@RequestBody @Valid MedicationRequest request) {
+		MedicationDTO med = service.salvar(request);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(disease.getCodigo()).toUri();
+				.path("/{id}").buildAndExpand(med.getId()).toUri();
 		
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<DiseaseDTO> buscar(@PathVariable String id) {
-		DiseaseDTO disease = service.buscar(id);
+	public ResponseEntity<MedicationDTO> buscar(@PathVariable Long id) {
+		MedicationDTO med = service.buscar(id);
 		
-		if (disease != null) {
+		if (med != null) {
 			
-			return ResponseEntity.ok().body(disease);
+			return ResponseEntity.ok().body(med);
 		}
 
 		return ResponseEntity.notFound().build();	
@@ -79,5 +77,5 @@ public class DiseaseController {
 //		return ResponseEntity.noContent().build();
 //
 //	}
-	
+
 }

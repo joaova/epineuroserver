@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DiseaseRepository extends JpaRepository<Disease, Long>{
+public interface DiseaseRepository extends JpaRepository<Disease, String>{
 	
 	@Query("SELECT d FROM Disease d WHERE d.codigo = :cid")
 	Optional<Disease> findByCid(String cid);
