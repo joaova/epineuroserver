@@ -8,7 +8,7 @@ public enum DiseaseGroup {
 	DEMENTIA(3, "Demências"),
 	CEREBROVASCULAR_DISEASE(4, "Doenças Cerebrovasculares"),
 	NEUROMUSCULAR_DISEASE(5, "Doenças neuromusculares"),
-	NEUROINFECTIOUS_DISEASE(6, ""),
+	NEUROINFECTIOUS_DISEASE(6, "Doenças neuroinfecciosas"),
 	SPINAL_CORD(7, "Doenças da medula espinal"),
 	PNS_AND_MOTOR_NEURON(8, "Doenças do sistema nervoso periférico e do neurônio motor"),
 	SLEEP_DISORDERS(9, "Doenças do sono"),
