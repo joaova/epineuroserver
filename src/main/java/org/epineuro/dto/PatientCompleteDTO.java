@@ -25,7 +25,7 @@ public class PatientCompleteDTO {
 	private LocalDate dischargeDate;
 	private Integer diseaseGroup;
 	private Set<DiseaseDTO> comorbities;
-	private Double bmi;
+	private String bmi;
 	private Integer smoking;
 	private Integer alcoholism;
 	private Set<DrugsDTO> drugs;

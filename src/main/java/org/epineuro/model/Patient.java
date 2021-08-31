@@ -66,7 +66,7 @@ public class Patient implements Serializable {
 
 	// fatores de risco
 
-	private Double bmi;
+	private String bmi;
 	private Integer smoking;
 	private Integer alcoholism;
 	
@@ -92,7 +92,7 @@ public class Patient implements Serializable {
 
 	public Patient(Long id, Gender gender, Color color, CivilState civilState, Scholarity scholarity, String birthState, String birthCity, String currentCity, 
 			Job job, Religion religion, LocalDate birthDate, LocalDate startOutpatientFollowUp, LocalDate endOutpatientFollowUp, LocalDate dischargeDate,
-			DiseaseGroup diseaseGroup, Set<Disease> comorbities, Double bmi, Integer smoking, Integer alcoholism, Set<Drugs> drugs, Integer previousNeurosurgery,
+			DiseaseGroup diseaseGroup, Set<Disease> comorbities, String bmi, Integer smoking, Integer alcoholism, Set<Drugs> drugs, Integer previousNeurosurgery,
 			Set<Disease> firstDegreeRelative, Set<Exam> exams, Set<Medication> medications) {
 
 		super();
@@ -312,11 +312,11 @@ public class Patient implements Serializable {
 		this.medications = medications;
 	}
 
-	public Double getBmi() {
+	public String getBmi() {
 		return bmi;
 	}
 
-	public void setBmi(Double bmi) {
+	public void setBmi(String bmi) {
 		this.bmi = bmi;
 	}
 

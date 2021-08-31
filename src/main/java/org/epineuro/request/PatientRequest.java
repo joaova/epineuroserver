@@ -23,7 +23,7 @@ public class PatientRequest {
 	private LocalDate dischargeDate;
 	private Integer diseaseGroup;
 	private Set<DiseaseRequest> comorbities;
-	private Double bmi;
+	private String bmi;
 	private Integer smoking;
 	private Integer alcoholism;
 	private Set<DrugsRequest> drugs;
