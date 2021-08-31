@@ -10,6 +10,7 @@ import org.epineuro.dto.ExamDTO;
 import org.epineuro.dto.MedicationDTO;
 import org.epineuro.dto.PatientCompleteDTO;
 import org.epineuro.dto.PatientDTO;
+import org.epineuro.dto.SurgeryDTO;
 import org.epineuro.enums.CivilState;
 import org.epineuro.enums.Color;
 import org.epineuro.enums.DiseaseGroup;
@@ -22,6 +23,7 @@ import org.epineuro.model.Drugs;
 import org.epineuro.model.Exam;
 import org.epineuro.model.Medication;
 import org.epineuro.model.Patient;
+import org.epineuro.model.Surgery;
 import org.epineuro.request.PatientRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -40,6 +42,8 @@ public class PatientMapper {
 	private MedicationMapper medicationMapper;
 	@Autowired
 	private DrugsMapper drugsMapper;
+	@Autowired
+	private SurgeryMapper surgMapper;
 
 	
 	// Quando precisar de novo disso, lembrar que é assim por conta do enum. Talvez precise alterar
@@ -73,11 +77,12 @@ public class PatientMapper {
 		Set<DrugsDTO> drugs = drugsMapper.drugsToDTO(patient.getDrugs());
 		Set<MedicationDTO> medications = medicationMapper.medicationToDTO(patient.getMedication());
 		Set<ExamDTO> exams = examMapper.examToDTO(patient.getExams());
+		Set<SurgeryDTO> surgs = surgMapper.SurgeryToDTO(patient.getPreviousNeurosurgery());
 		PatientCompleteDTO pcDTO = new PatientCompleteDTO(patient.getId(), patient.getGenderCod(), patient.getColorCod(),
 		patient.getCivilStateCod(), patient.getScholarityCod(), patient.getBirthState(), patient.getBirthCity(), patient.getCurrentCity(),
 		patient.getJobCod(), patient.getReligionCod(), patient.getBirthDate(), patient.getStartOutpatientFollowUp(), patient.getEndOutpatientFollowUp(),
 		patient.getDischargeDate(), patient.getDiseaseGroupCod(), comorbities, patient.getBmi(), patient.getSmoking(),
-		patient.getAlcoholism(), drugs, patient.getPreviousNeurosurgery(),firstDegreeRelative, exams, medications);
+		patient.getAlcoholism(), drugs, surgs,firstDegreeRelative, exams, medications);
 		return pcDTO;
 	}
 
@@ -88,12 +93,14 @@ public class PatientMapper {
 		Set<Drugs> drugs = drugsMapper.drugsRequestToModel(patientRequest.getDrugs());
 		Set<Medication> medications = medicationMapper.medicationRequestToModel(patientRequest.getMedications());
 		Set<Exam> exams = examMapper.examRequestToModel(patientRequest.getExams());
+		Set<Surgery> surgs = surgMapper.SurgeryRequestToModel(patientRequest.getPreviousNeurosurgery());
+
 		Patient p = new Patient(patientRequest.getId(), Gender.toEnum(patientRequest.getGender()), Color.toEnum(patientRequest.getColor()), 
 				CivilState.toEnum(patientRequest.getCivilState()), Scholarity.toEnum(patientRequest.getScholarity()), 
 				patientRequest.getBirthState(), patientRequest.getBirthCity(), patientRequest.getCurrentCity(), Job.toEnum(patientRequest.getJob()), Religion.toEnum(patientRequest.getReligion()),
 				patientRequest.getBirthDate(), patientRequest.getStartOutpatientFollowUp(), patientRequest.getEndOutpatientFollowUp(), patientRequest.getDischargeDate(), 
 				DiseaseGroup.toEnum(patientRequest.getDiseaseGroup()) ,comorbities, patientRequest.getBmi(), patientRequest.getSmoking(), patientRequest.getAlcoholism(), 
-				drugs, patientRequest.getPreviousNeurosurgery(), firstDegreeRelative, exams, medications);
+				drugs, surgs, firstDegreeRelative, exams, medications);
 
 		System.out.println(p);
 		return p;

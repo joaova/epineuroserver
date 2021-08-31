@@ -3,6 +3,7 @@ package org.epineuro.dto;
 import java.time.LocalDate;
 import java.util.Set;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -29,7 +30,7 @@ public class PatientCompleteDTO {
 	private Integer smoking;
 	private Integer alcoholism;
 	private Set<DrugsDTO> drugs;
-	private Integer previousNeurosurgery;
+	private Set<SurgeryDTO> previousNeurosurgery;
 	private Set<DiseaseDTO> firstDegreeRelative;
 	private Set<ExamDTO> CNSEvaluation;
 	private Set<MedicationDTO> medications;

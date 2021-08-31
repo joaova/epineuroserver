@@ -14,11 +14,13 @@ import org.epineuro.request.DrugsRequest;
 import org.epineuro.request.ExamRequest;
 import org.epineuro.request.MedicationRequest;
 import org.epineuro.request.PatientRequest;
+import org.epineuro.request.SurgeryRequest;
 import org.epineuro.service.DiseaseService;
 import org.epineuro.service.DrugService;
 import org.epineuro.service.ExamService;
 import org.epineuro.service.MedicationService;
 import org.epineuro.service.PatientService;
+import org.epineuro.service.SurgeryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -52,6 +54,9 @@ public class PatientController {
 
 	@Autowired
 	private ExamService exService;
+
+	@Autowired
+	private SurgeryService surgService;
 	
 	@GetMapping("/pagination/{page}/{pageSize}")
 	public List<PatientDTO> listByPage(@PathVariable Integer page, @PathVariable Integer pageSize) {
@@ -90,6 +95,10 @@ public class PatientController {
 		Set<MedicationRequest> med = new HashSet<MedicationRequest>();
 		med = request.getMedications();
 		med.forEach(dis -> medService.salvar(dis));	
+
+		Set<SurgeryRequest> surg = new HashSet<SurgeryRequest>();
+		surg = request.getPreviousNeurosurgery();
+		surg.forEach(dis -> surgService.salvar(dis));
 
 		Patient patient = service.salvar(request);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()

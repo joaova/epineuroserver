@@ -74,7 +74,9 @@ public class Patient implements Serializable {
 	@JoinTable(name = "patient_drugs", joinColumns = @JoinColumn(name = "patient_id"), inverseJoinColumns = @JoinColumn(name = "drug_id"))
 	private Set<Drugs> drugs;
 
-	private Integer previousNeurosurgery;
+	@ManyToMany
+	@JoinTable(name = "patient_surgeries", joinColumns = @JoinColumn(name = "patient_id"), inverseJoinColumns = @JoinColumn(name = "surgery_id"))
+	private Set<Surgery> previousNeurosurgery;
 
 	@ManyToMany
 	@JoinTable(name = "relatives_disease", joinColumns = @JoinColumn(name = "patient_id"), inverseJoinColumns = @JoinColumn(name = "disease_id"))
@@ -92,7 +94,7 @@ public class Patient implements Serializable {
 
 	public Patient(Long id, Gender gender, Color color, CivilState civilState, Scholarity scholarity, String birthState, String birthCity, String currentCity, 
 			Job job, Religion religion, LocalDate birthDate, LocalDate startOutpatientFollowUp, LocalDate endOutpatientFollowUp, LocalDate dischargeDate,
-			DiseaseGroup diseaseGroup, Set<Disease> comorbities, String bmi, Integer smoking, Integer alcoholism, Set<Drugs> drugs, Integer previousNeurosurgery,
+			DiseaseGroup diseaseGroup, Set<Disease> comorbities, String bmi, Integer smoking, Integer alcoholism, Set<Drugs> drugs, Set<Surgery> previousNeurosurgery,
 			Set<Disease> firstDegreeRelative, Set<Exam> exams, Set<Medication> medications) {
 
 		super();
@@ -336,11 +338,11 @@ public class Patient implements Serializable {
 		this.alcoholism = alcoholism;
 	}
 
-	public Integer getPreviousNeurosurgery() {
+	public Set<Surgery> getPreviousNeurosurgery() {
 		return previousNeurosurgery;
 	}
 
-	public void setPreviousNeurosurgery(Integer previousNeurosurgery) {
+	public void setPreviousNeurosurgery(Set<Surgery> previousNeurosurgery) {
 		this.previousNeurosurgery = previousNeurosurgery;
 	}
 

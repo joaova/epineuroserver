@@ -2,6 +2,8 @@ package org.epineuro.request;
 
 import java.time.LocalDate;
 import java.util.Set;
+
+
 import lombok.Data;
 
 @Data
@@ -27,7 +29,7 @@ public class PatientRequest {
 	private Integer smoking;
 	private Integer alcoholism;
 	private Set<DrugsRequest> drugs;
-	private Integer previousNeurosurgery;
+	private Set<SurgeryRequest> previousNeurosurgery;
 	private Set<DiseaseRequest> firstDegreeRelative;
 	private Set<ExamRequest> exams;
 	private Set<MedicationRequest> medications;
