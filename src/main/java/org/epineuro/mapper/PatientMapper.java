@@ -88,9 +88,10 @@ public class PatientMapper {
 
 	public Patient dtoRequestToModel(PatientRequest patientRequest) {
 //		return modelMapper.map(patientRequest, patientPatient.class);
-		Set<Disease> comorbities = diseaseMapper.comorbitiesRequestToModel(patientRequest.getComorbities());
+
 		Set<Disease> firstDegreeRelative = diseaseMapper.comorbitiesRequestToModel(patientRequest.getFirstDegreeRelative());
 		Set<Drugs> drugs = drugsMapper.drugsRequestToModel(patientRequest.getDrugs());
+		Set<Disease> comorbities = diseaseMapper.comorbitiesRequestToModel(patientRequest.getComorbities());
 		Set<Medication> medications = medicationMapper.medicationRequestToModel(patientRequest.getMedications());
 		Set<Exam> exams = examMapper.examRequestToModel(patientRequest.getExams());
 		Set<Surgery> surgs = surgMapper.SurgeryRequestToModel(patientRequest.getPreviousNeurosurgery());

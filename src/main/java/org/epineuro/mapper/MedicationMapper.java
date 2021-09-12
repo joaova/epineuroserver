@@ -26,9 +26,12 @@ public class MedicationMapper {
 	
 	public Set<Medication> medicationRequestToModel(Set<MedicationRequest> dR) {
 		
-		return dR.stream()
-				.map(dis -> modelMapper.map(dis, Medication.class))
-				.collect(Collectors.toSet());		
+		if (dR != null) {
+			return dR.stream()
+			.map(dis -> modelMapper.map(dis, Medication.class))
+			.collect(Collectors.toSet());	
+		}
+		return null;	
 	}
 
 	

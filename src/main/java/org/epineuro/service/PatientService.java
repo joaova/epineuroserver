@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.epineuro.dto.PatientCompleteDTO;
 import org.epineuro.dto.PatientDTO;
 import org.epineuro.exception.PatientNotFoundException;
 import org.epineuro.mapper.PatientMapper;
@@ -43,6 +44,13 @@ public class PatientService {
 					  .collect(Collectors.toList());
 	}
 	
+	public List<PatientCompleteDTO> fList() {
+		List<Patient> patient = repository.findAll();
+		return patient.stream()
+					  .map(p -> mapper.modelToCompleteDTO(p))
+					  .collect(Collectors.toList());
+	}
+
 	public PatientDTO searchById(Long id) {
 		return repository.findById(id)
 			.map(p -> mapper.modelToDTO(p))

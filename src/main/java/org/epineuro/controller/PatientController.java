@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.validation.Valid;
 
+import org.epineuro.dto.PatientCompleteDTO;
 import org.epineuro.dto.PatientDTO;
 import org.epineuro.model.Patient;
 import org.epineuro.request.DiseaseRequest;
@@ -68,6 +69,11 @@ public class PatientController {
 		return service.list();
 	}
 
+	@GetMapping("/full")
+	public List<PatientCompleteDTO> fList() {
+		return service.fList();
+	}
+
 	@GetMapping("/{id}")
 	public PatientDTO search(@PathVariable Long id) {
 		return service.searchById(id);
@@ -78,27 +84,49 @@ public class PatientController {
 
 		Set<DiseaseRequest> c = new HashSet<DiseaseRequest>();
 		c = request.getComorbities();
-		c.forEach(dis -> dService.salvar(dis));
+
+		if (c != null) {
+			c.forEach(dis -> dService.salvar(dis));
+		}
+		
 
 		Set<DrugsRequest> dru = new HashSet<DrugsRequest>();
 		dru = request.getDrugs();
-		dru.forEach(dis -> drugsService.salvar(dis));
+
+		if (dru != null) {
+			dru.forEach(dis -> drugsService.salvar(dis));
+		}
+		
 
 		Set<DiseaseRequest> familyC = new HashSet<DiseaseRequest>();
 		familyC = request.getFirstDegreeRelative();
-		familyC.forEach(dis -> dService.salvar(dis));
+
+		if (familyC != null) {
+			familyC.forEach(dis -> dService.salvar(dis));
+		}
+		
 
 		Set<ExamRequest> ex = new HashSet<ExamRequest>();
 		ex = request.getExams();
-		ex.forEach(dis -> exService.salvar(dis));
+
+		if (ex != null) {
+			ex.forEach(dis -> exService.salvar(dis));
+		}
+		
 
 		Set<MedicationRequest> med = new HashSet<MedicationRequest>();
 		med = request.getMedications();
-		med.forEach(dis -> medService.salvar(dis));	
+
+		if (med != null) {
+			med.forEach(dis -> medService.salvar(dis));	
+		}
 
 		Set<SurgeryRequest> surg = new HashSet<SurgeryRequest>();
 		surg = request.getPreviousNeurosurgery();
-		surg.forEach(dis -> surgService.salvar(dis));
+
+		if (surg != null) {
+			surg.forEach(dis -> surgService.salvar(dis));
+		}
 
 		Patient patient = service.salvar(request);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()

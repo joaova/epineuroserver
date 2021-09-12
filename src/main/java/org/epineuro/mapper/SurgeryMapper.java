@@ -25,9 +25,12 @@ public class SurgeryMapper {
 	
 	public Set<Surgery> SurgeryRequestToModel(Set<SurgeryRequest> dR) {
 		
-		return dR.stream()
-				.map(dis -> modelMapper.map(dis, Surgery.class))
-				.collect(Collectors.toSet());		
+		if (dR != null) {
+			return dR.stream()
+			.map(dis -> modelMapper.map(dis, Surgery.class))
+			.collect(Collectors.toSet());
+		}
+		return null;		
 	}
 
 	

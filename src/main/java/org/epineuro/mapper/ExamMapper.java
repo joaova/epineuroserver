@@ -25,15 +25,25 @@ public class ExamMapper {
 	
 	public Set<Exam> examRequestToModel(Set<ExamRequest> dR) {
 		
-		return dR.stream()
-				.map(dis -> modelMapper.map(dis, Exam.class))
-				.collect(Collectors.toSet());		
+		if (dR != null) {
+			return dR.stream()
+			.map(dis -> modelMapper.map(dis, Exam.class))
+			.collect(Collectors.toSet());	
+		}
+
+		return null;
+			
 	}
 
 	
 	public Set<ExamDTO> examToDTO(Set<Exam> dM) {
-		return dM.stream()
-				.map(dis -> modelMapper.map(dis, ExamDTO.class))
-				.collect(Collectors.toSet());
+
+		if (dM != null) {
+			return dM.stream()
+			.map(dis -> modelMapper.map(dis, ExamDTO.class))
+			.collect(Collectors.toSet());
+		}
+		
+		return null;
 	}
 }

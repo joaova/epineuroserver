@@ -26,9 +26,13 @@ public class DiseaseMapper {
 	
 	public Set<Disease> comorbitiesRequestToModel(Set<DiseaseRequest> dR) {
 		
-		return dR.stream()
-				.map(dis -> modelMapper.map(dis, Disease.class))
-				.collect(Collectors.toSet());		
+		if (dR != null) {
+			return dR.stream()
+			.map(dis -> modelMapper.map(dis, Disease.class))
+			.collect(Collectors.toSet());
+		}
+
+		return null;	
 	}
 
 	
