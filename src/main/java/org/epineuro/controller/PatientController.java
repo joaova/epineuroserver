@@ -78,6 +78,11 @@ public class PatientController {
 	public PatientDTO search(@PathVariable Long id) {
 		return service.searchById(id);
 	}
+
+	@GetMapping("/full/{id}")
+	public PatientCompleteDTO fSearch(@PathVariable Long id) {
+		return service.fSearch(id);
+	}
 	
 	@PostMapping
 	public ResponseEntity<Void> salvar(@RequestBody @Valid PatientRequest request) {

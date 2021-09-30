@@ -57,6 +57,12 @@ public class PatientService {
 			.orElseThrow(() -> new PatientNotFoundException(id));
 	}
 
+	public PatientCompleteDTO fSearch(Long id) {
+		return repository.findById(id)
+			.map(p -> mapper.modelToCompleteDTO(p))
+			.orElseThrow(() -> new PatientNotFoundException(id));
+	}
+
 	@Transactional
 	public Patient salvar(PatientRequest request) {
 		Patient p = mapper.dtoRequestToModel(request);
