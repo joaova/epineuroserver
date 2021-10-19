@@ -1,8 +1,10 @@
 package org.epineuro.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,15 +12,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
-@Table(name="exams")
-public class Exam {
-	
-	@Id
-	private Long id;
-	private String nome;
-	
+public class Scholarity {
+    @Id
+    private Long id;
+    private String name;
+
+    @OneToMany(mappedBy="scholarity")
+    private Set<Patient> patients;
 }

@@ -9,16 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-
-import org.epineuro.enums.CivilState;
-import org.epineuro.enums.Color;
-import org.epineuro.enums.DiseaseGroup;
-import org.epineuro.enums.Gender;
-import org.epineuro.enums.Job;
-import org.epineuro.enums.Religion;
-import org.epineuro.enums.Scholarity;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import org.epineuro.enums.Gender;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -33,16 +28,27 @@ public class Patient implements Serializable {
 
 	@Id
 	private Long id;
-
-	private Integer gender;
-	private Integer color;
-	private Integer civilState;
-	private Integer scholarity;
+	
+	// Objetos próprios da tabela
 	private String birthState;
 	private String birthCity;
 	private String currentCity;
-	private Integer job;
-	private Integer religion;
+	private String job;
+	
+	// Remetem à outra tabela
+	private Integer gender;
+
+	@ManyToOne
+	@JoinColumn(name="color_id", nullable=false) 
+	private Color color;
+
+	@ManyToOne
+	@JoinColumn(name="civil_state_id", nullable=false) 
+	private CivilState civilState;
+
+	@ManyToOne
+	@JoinColumn(name="scholarity_id", nullable=false) 
+	private Scholarity scholarity;
 
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate birthDate;
@@ -55,10 +61,9 @@ public class Patient implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate endOutpatientFollowUp;
 
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDate dischargeDate;
-
-	private Integer diseaseGroup;
+	@ManyToOne
+	@JoinColumn(name="disease_group_id", nullable=false) 
+	private DiseaseGroup diseaseGroup;
 
 	@ManyToMany
 	@JoinTable(name = "patient_disease", joinColumns = @JoinColumn(name = "patient_id"), inverseJoinColumns = @JoinColumn(name = "disease_id"))
@@ -66,7 +71,6 @@ public class Patient implements Serializable {
 
 	// fatores de risco
 
-	private String bmi;
 	private Integer smoking;
 	private Integer alcoholism;
 	
@@ -79,13 +83,13 @@ public class Patient implements Serializable {
 	private Set<Surgery> previousNeurosurgery;
 
 	@ManyToMany
-	@JoinTable(name = "relatives_disease", joinColumns = @JoinColumn(name = "patient_id"), inverseJoinColumns = @JoinColumn(name = "disease_id"))
+	@JoinTable(name = "family_history", joinColumns = @JoinColumn(name = "patient_id"), inverseJoinColumns = @JoinColumn(name = "disease_id"))
 	private Set<Disease> firstDegreeRelative;
 
 	// other
 
 	@ManyToMany
-	@JoinTable(name = "complementary_exams", joinColumns = @JoinColumn(name = "patient_id"), inverseJoinColumns = @JoinColumn(name = "complementary_exams_id"))
+	@JoinTable(name = "patient_exams", joinColumns = @JoinColumn(name = "patient_id"), inverseJoinColumns = @JoinColumn(name = "complementary_exams_id"))
 	private Set<Exam> exams;
 
 	@ManyToMany
@@ -93,28 +97,25 @@ public class Patient implements Serializable {
 	private Set<Medication> medications;
 
 	public Patient(Long id, Gender gender, Color color, CivilState civilState, Scholarity scholarity, String birthState, String birthCity, String currentCity, 
-			Job job, Religion religion, LocalDate birthDate, LocalDate startOutpatientFollowUp, LocalDate endOutpatientFollowUp, LocalDate dischargeDate,
-			DiseaseGroup diseaseGroup, Set<Disease> comorbities, String bmi, Integer smoking, Integer alcoholism, Set<Drugs> drugs, Set<Surgery> previousNeurosurgery,
+			String job, LocalDate birthDate, LocalDate startOutpatientFollowUp, LocalDate endOutpatientFollowUp,
+			DiseaseGroup diseaseGroup, Set<Disease> comorbities, Integer smoking, Integer alcoholism, Set<Drugs> drugs, Set<Surgery> previousNeurosurgery,
 			Set<Disease> firstDegreeRelative, Set<Exam> exams, Set<Medication> medications) {
 
 		super();
 		this.id = id;
 		this.gender = (gender == null) ? null : gender.getCod();
-		this.color = (color == null) ? null : color.getCod();
-		this.civilState = (civilState == null) ? null : civilState.getCod();
-		this.scholarity = (scholarity == null) ? null : scholarity.getCod();
+		this.color = color;
+		this.civilState = civilState;
+		this.scholarity = scholarity;
 		this.birthState = birthState;
 		this.birthCity = birthCity;
 		this.currentCity = currentCity;
-		this.job = (job == null) ? null : job.getCod();
-		this.religion = (religion == null) ? null : religion.getCod();
+		this.job = job;
 		this.birthDate = birthDate;
 		this.startOutpatientFollowUp = startOutpatientFollowUp;
 		this.endOutpatientFollowUp = endOutpatientFollowUp;
-		this.dischargeDate = dischargeDate;
-		this.diseaseGroup = (diseaseGroup == null) ? null : diseaseGroup.getCod();
+		this.diseaseGroup = diseaseGroup;
 		this.comorbities = comorbities;
-		this.bmi = bmi;
 		this.smoking = smoking;
 		this.alcoholism = alcoholism;
 		this.drugs =  drugs;
@@ -138,75 +139,43 @@ public class Patient implements Serializable {
 	}
 
 	public Color getColor() {
-		return Color.toEnum(color);
-	}
-
-	public Integer getColorCod() {
 		return this.color;
 	}
 
 	public void setColor(Color color) {
-		this.color = color.getCod();
+		this.color = color;
 	}
 
 	public CivilState getCivilState() {
-		return CivilState.toEnum(civilState);
-	}
-
-	public Integer getCivilStateCod() {
 		return this.civilState;
 	}
 
 	public void setCivilState(CivilState civilState) {
-		this.civilState = civilState.getCod();
+		this.civilState = civilState;;
 	}
 
 	public Scholarity getScholarity() {
-		return Scholarity.toEnum(scholarity);
-	}
-
-	public Integer getScholarityCod() {
 		return this.scholarity;
 	}
 
 	public void setScholarity(Scholarity scholarity) {
-		this.scholarity = scholarity.getCod();
+		this.scholarity = scholarity;
 	}
 
-	public Job getJob() {
-		return Job.toEnum(job);
-	}
-
-	public Integer getJobCod() {
+	public String getJob() {
 		return this.job;
 	}
 
-	public void setJob(Job job) {
-		this.job = job.getCod();
-	}
-
-	public Religion getReligion() {
-		return Religion.toEnum(religion);
-	}
-
-	public Integer getReligionCod() {
-		return this.religion;
-	}
-
-	public void setReligion(Religion religion) {
-		this.religion = religion.getCod();
+	public void setJob(String job) {
+		this.job = job;
 	}
 
 	public DiseaseGroup getDiseaseGroup() {
-		return DiseaseGroup.toEnum(diseaseGroup);
-	}
-
-	public Integer getDiseaseGroupCod() {
 		return this.diseaseGroup;
 	}
 
 	public void setDiseaseGroup(DiseaseGroup disG) {
-		this.diseaseGroup = disG.getCod();
+		this.diseaseGroup = disG;
 	}
 
 	public Long getId() {
@@ -265,15 +234,6 @@ public class Patient implements Serializable {
 		this.endOutpatientFollowUp = endOutpatientFollowUp;
 	}
 
-	public LocalDate getDischargeDate() {
-		return dischargeDate;
-	}
-
-	public void setDischargeDate(LocalDate dischargeDate) {
-		this.dischargeDate = dischargeDate;
-	}
-
-
 	public Set<Disease> getComorbities() {
 		return comorbities;
 	}
@@ -312,14 +272,6 @@ public class Patient implements Serializable {
 
 	public void setMedication(Set<Medication> medications) {
 		this.medications = medications;
-	}
-
-	public String getBmi() {
-		return bmi;
-	}
-
-	public void setBmi(String bmi) {
-		this.bmi = bmi;
 	}
 
 	public Integer getSmoking() {

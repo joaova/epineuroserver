@@ -12,7 +12,6 @@ import org.epineuro.model.Exam;
 import org.epineuro.repository.ExamRepository;
 import org.epineuro.request.ExamRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,7 +30,7 @@ public class ExamService {
 					  .collect(Collectors.toList());
 	}
 	
-	public ExamDTO buscar(String id) {
+	public ExamDTO buscar(Long id) {
 		
 		Optional<Exam> exam = repository.findById(id);
 				
@@ -47,12 +46,11 @@ public class ExamService {
 	public ExamDTO salvar(ExamRequest request) {
 		Exam e = mapper.dtoRequestToModel(request);
 
-		Optional<Exam> exam = repository.findById(e.getName());
+		Optional<Exam> exam = repository.findById(e.getId());
 				
 		if(exam.isPresent()) {
 			return mapper.modelToDTO(exam.get());
 		}
-
 		return mapper.modelToDTO(repository.save(e));
 	}
 	

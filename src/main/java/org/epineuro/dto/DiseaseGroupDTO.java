@@ -3,7 +3,7 @@ package org.epineuro.dto;
 import lombok.Data;
 
 @Data
-public class SurgeryDTO {
+public class DiseaseGroupDTO {
     private Long id;
-    private String name;
+    private String nome;
 }

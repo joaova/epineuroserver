@@ -31,7 +31,7 @@ public class SurgeryService {
 					  .collect(Collectors.toList());
 	}
 	
-	public SurgeryDTO buscar(String id) {
+	public SurgeryDTO buscar(Long id) {
 		
 		Optional<Surgery> dru = repository.findById(id);
 				
@@ -47,7 +47,7 @@ public class SurgeryService {
 	public SurgeryDTO salvar(SurgeryRequest request) {
 		Surgery d = mapper.dtoRequestToModel(request);
 
-		Optional<Surgery> surgery = repository.findById(d.getName());
+		Optional<Surgery> surgery = repository.findById(d.getId());
 				
 		if(surgery.isPresent()) {
 			return mapper.modelToDTO(surgery.get());

@@ -12,7 +12,6 @@ import org.epineuro.model.Disease;
 import org.epineuro.repository.DiseaseRepository;
 import org.epineuro.request.DiseaseRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -47,7 +46,7 @@ public class DiseaseService {
 	public DiseaseDTO salvar(DiseaseRequest request) {
 		Disease d = mapper.dtoRequestToModel(request);
 
-		Optional<Disease> disease = repository.findById(d.getCodigo());
+		Optional<Disease> disease = repository.findById(request.getId());
 				
 		if(disease.isPresent()) {
 			return mapper.modelToDTO(disease.get());

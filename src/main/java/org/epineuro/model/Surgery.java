@@ -13,5 +13,6 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Surgery {
     @Id
+    private Long id;
     private String name;
 }

@@ -4,11 +4,19 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.epineuro.model.CivilState;
+import org.epineuro.model.Color;
+import org.epineuro.model.DiseaseGroup;
 import org.epineuro.model.Group;
 import org.epineuro.model.Permission;
+import org.epineuro.model.Scholarity;
 import org.epineuro.model.User;
+import org.epineuro.repository.CivilStateRepository;
+import org.epineuro.repository.ColorRepository;
+import org.epineuro.repository.DiseaseGroupRepository;
 import org.epineuro.repository.GroupRepository;
 import org.epineuro.repository.PermissionRepository;
+import org.epineuro.repository.ScholarityRepository;
 import org.epineuro.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -34,6 +42,18 @@ public class EpineuroApplication implements CommandLineRunner {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	@Autowired
+	private ScholarityRepository sRepository;
+
+	@Autowired
+	private CivilStateRepository cVRepository;
+
+	@Autowired
+	private ColorRepository cRepository;
+
+	@Autowired
+	private DiseaseGroupRepository dGRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -154,6 +174,34 @@ public class EpineuroApplication implements CommandLineRunner {
 			userRepository.saveAll(Arrays.asList(u1,u2,u3,u4,u5,u6,u7,u8,u9));
 			
 		}
+
+		Scholarity s1 = Scholarity.builder()
+						.id(1L)
+						.name("Ensino")
+		.build();
+
+		sRepository.save(s1);
+
+		CivilState c1 = CivilState.builder()
+						.id(1L)
+						.name("Solteiro")
+		.build();
+
+		cVRepository.save(c1);
+
+		Color c2 = Color.builder()
+					.id(1L)
+					.name("Branco")
+		.build();
+
+		cRepository.save(c2);
+
+		DiseaseGroup dg = DiseaseGroup.builder()
+							.id(1L)
+							.groupName("Cefaleia")
+		.build();
+
+		dGRepository.save(dg);
 		
 	}
 

@@ -31,7 +31,7 @@ public class DrugService {
 					  .collect(Collectors.toList());
 	}
 	
-	public DrugsDTO buscar(String id) {
+	public DrugsDTO buscar(Long id) {
 		
 		Optional<Drugs> dru = repository.findById(id);
 				
@@ -47,7 +47,7 @@ public class DrugService {
 	public DrugsDTO salvar(DrugsRequest request) {
 		Drugs d = mapper.dtoRequestToModel(request);
 
-		Optional<Drugs> drugs = repository.findById(d.getName());
+		Optional<Drugs> drugs = repository.findById(d.getId());
 				
 		if(drugs.isPresent()) {
 			return mapper.modelToDTO(drugs.get());

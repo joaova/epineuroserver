@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class DiseaseDTO {
 	
-	private String codigo;
-	private String nome;
+	private String id;
+	private String name;
 	
 }

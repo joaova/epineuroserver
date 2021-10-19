@@ -4,25 +4,27 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Set;
 
+import org.epineuro.dto.CivilStateDTO;
+import org.epineuro.dto.ColorDTO;
 import org.epineuro.dto.DiseaseDTO;
+import org.epineuro.dto.DiseaseGroupDTO;
 import org.epineuro.dto.DrugsDTO;
 import org.epineuro.dto.ExamDTO;
 import org.epineuro.dto.MedicationDTO;
 import org.epineuro.dto.PatientCompleteDTO;
 import org.epineuro.dto.PatientDTO;
+import org.epineuro.dto.ScholarityDTO;
 import org.epineuro.dto.SurgeryDTO;
-import org.epineuro.enums.CivilState;
-import org.epineuro.enums.Color;
-import org.epineuro.enums.DiseaseGroup;
 import org.epineuro.enums.Gender;
-import org.epineuro.enums.Job;
-import org.epineuro.enums.Religion;
-import org.epineuro.enums.Scholarity;
+import org.epineuro.model.CivilState;
+import org.epineuro.model.Color;
 import org.epineuro.model.Disease;
+import org.epineuro.model.DiseaseGroup;
 import org.epineuro.model.Drugs;
 import org.epineuro.model.Exam;
 import org.epineuro.model.Medication;
 import org.epineuro.model.Patient;
+import org.epineuro.model.Scholarity;
 import org.epineuro.model.Surgery;
 import org.epineuro.request.PatientRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +46,15 @@ public class PatientMapper {
 	private DrugsMapper drugsMapper;
 	@Autowired
 	private SurgeryMapper surgMapper;
+	@Autowired
+	private DiseaseGroupMapper dGMapper;
+	@Autowired
+	private ColorMapper cMapper;
+	@Autowired 
+	private CivilStateMapper cVMapper;
+	@Autowired
+	private ScholarityMapper sMapper;
+
 
 	
 	// Quando precisar de novo disso, lembrar que é assim por conta do enum. Talvez precise alterar
@@ -64,7 +75,7 @@ public class PatientMapper {
 		// String mainDisease = patient.getComorbities().iterator().next().getNome();
 		
 		PatientDTO pDTO = new PatientDTO(patient.getId(), patient.getGenderCod(), 
-				patient.getCurrentCity(), ageCalc(patient.getBirthDate(), LocalDate.now()), patient.getDiseaseGroupCod());
+				patient.getCurrentCity(), ageCalc(patient.getBirthDate(), LocalDate.now()), patient.getDiseaseGroup());
 		System.out.println(pDTO);
 		return pDTO;
 		
@@ -78,10 +89,16 @@ public class PatientMapper {
 		Set<MedicationDTO> medications = medicationMapper.medicationToDTO(patient.getMedication());
 		Set<ExamDTO> exams = examMapper.examToDTO(patient.getExams());
 		Set<SurgeryDTO> surgs = surgMapper.SurgeryToDTO(patient.getPreviousNeurosurgery());
-		PatientCompleteDTO pcDTO = new PatientCompleteDTO(patient.getId(), patient.getGenderCod(), patient.getColorCod(),
-		patient.getCivilStateCod(), patient.getScholarityCod(), patient.getBirthState(), patient.getBirthCity(), patient.getCurrentCity(),
-		patient.getJobCod(), patient.getReligionCod(), patient.getBirthDate(), patient.getStartOutpatientFollowUp(), patient.getEndOutpatientFollowUp(),
-		patient.getDischargeDate(), patient.getDiseaseGroupCod(), comorbities, patient.getBmi(), patient.getSmoking(),
+		DiseaseGroupDTO dg = dGMapper.modelToDTO(patient.getDiseaseGroup());
+		CivilStateDTO cv = cVMapper.modelToDTO(patient.getCivilState());
+		ScholarityDTO s = sMapper.modelToDTO(patient.getScholarity());
+		ColorDTO c = cMapper.modelToDTO(patient.getColor());
+		
+
+
+		PatientCompleteDTO pcDTO = new PatientCompleteDTO(patient.getId(), patient.getGenderCod(), c,
+		cv, s, patient.getBirthState(), patient.getBirthCity(), patient.getCurrentCity(),
+		patient.getJob(), patient.getBirthDate(), patient.getStartOutpatientFollowUp(), patient.getEndOutpatientFollowUp(), dg, comorbities, patient.getSmoking(),
 		patient.getAlcoholism(), drugs, surgs,firstDegreeRelative, exams, medications);
 		return pcDTO;
 	}
@@ -95,12 +112,16 @@ public class PatientMapper {
 		Set<Medication> medications = medicationMapper.medicationRequestToModel(patientRequest.getMedications());
 		Set<Exam> exams = examMapper.examRequestToModel(patientRequest.getExams());
 		Set<Surgery> surgs = surgMapper.SurgeryRequestToModel(patientRequest.getPreviousNeurosurgery());
+		DiseaseGroup dg = dGMapper.dtoRequestToModel(patientRequest.getDiseaseGroup());
+		CivilState cv = cVMapper.dtoRequestToModel(patientRequest.getCivilState());
+		Scholarity s = sMapper.dtoRequestToModel(patientRequest.getScholarity());
+		Color c = cMapper.dtoRequestToModel(patientRequest.getColor());
+		
 
-		Patient p = new Patient(patientRequest.getId(), Gender.toEnum(patientRequest.getGender()), Color.toEnum(patientRequest.getColor()), 
-				CivilState.toEnum(patientRequest.getCivilState()), Scholarity.toEnum(patientRequest.getScholarity()), 
-				patientRequest.getBirthState(), patientRequest.getBirthCity(), patientRequest.getCurrentCity(), Job.toEnum(patientRequest.getJob()), Religion.toEnum(patientRequest.getReligion()),
-				patientRequest.getBirthDate(), patientRequest.getStartOutpatientFollowUp(), patientRequest.getEndOutpatientFollowUp(), patientRequest.getDischargeDate(), 
-				DiseaseGroup.toEnum(patientRequest.getDiseaseGroup()) ,comorbities, patientRequest.getBmi(), patientRequest.getSmoking(), patientRequest.getAlcoholism(), 
+		Patient p = new Patient(patientRequest.getId(), Gender.toEnum(patientRequest.getGender()), c, 
+				cv, s, patientRequest.getBirthState(), patientRequest.getBirthCity(), patientRequest.getCurrentCity(), patientRequest.getJob(),
+				patientRequest.getBirthDate(), patientRequest.getStartOutpatientFollowUp(), patientRequest.getEndOutpatientFollowUp(),
+				dg ,comorbities, patientRequest.getSmoking(), patientRequest.getAlcoholism(), 
 				drugs, surgs, firstDegreeRelative, exams, medications);
 
 		System.out.println(p);
