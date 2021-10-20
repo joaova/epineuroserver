@@ -31,7 +31,7 @@ public class MedicationService {
 					  .collect(Collectors.toList());
 	}
 	
-	public MedicationDTO buscar(String id) {
+	public MedicationDTO buscar(Long id) {
 		
 		Optional<Medication> med = repository.findById(id);
 				

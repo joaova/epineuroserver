@@ -6,6 +6,6 @@ import lombok.Data;
 public class ScholarityDTO {
     
     private Long id;
-    private String nome;
+    private String name;
 
 }
