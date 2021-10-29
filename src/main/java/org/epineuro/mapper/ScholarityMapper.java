@@ -15,11 +15,22 @@ public class ScholarityMapper {
 	private ModelMapper modelMapper;
 	
 	public ScholarityDTO modelToDTO(Scholarity Scholarity) {
-		return modelMapper.map(Scholarity, ScholarityDTO.class);
+		if (Scholarity != null) {
+			return modelMapper.map(Scholarity, ScholarityDTO.class);
+
+		}
+
+		return null;
 	}
 
 	public Scholarity dtoRequestToModel(ScholarityRequest ScholarityRequest) {
-		return modelMapper.map(ScholarityRequest, Scholarity.class);
+
+		if (ScholarityRequest != null) {
+			return modelMapper.map(ScholarityRequest, Scholarity.class);
+
+		}
+
+		return null;
 	}
 	
 }

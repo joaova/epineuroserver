@@ -10,7 +10,6 @@ import lombok.Data;
 public class Medication {
     
     @Id
-    private Long id;
-	private String name;
+	private String id;
 
 }

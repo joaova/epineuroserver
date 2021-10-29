@@ -29,6 +29,7 @@ public class PatientRequest {
 	private Set<DiseaseRequest> firstDegreeRelative;
 	private Set<ExamRequest> exams;
 	private Set<MedicationRequest> medications;
+	private LocalDate patientUpdated;
 
 }
  

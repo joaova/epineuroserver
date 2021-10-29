@@ -25,7 +25,7 @@ public class MedicationController {
 	}
 
     @GetMapping("/{id}")
-	public MedicationDTO search(@PathVariable Long id) {
+	public MedicationDTO search(@PathVariable String id) {
 		return service.buscar(id);
 	}
 }

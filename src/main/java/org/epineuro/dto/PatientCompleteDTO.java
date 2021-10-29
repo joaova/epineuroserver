@@ -30,4 +30,5 @@ public class PatientCompleteDTO {
 	private Set<DiseaseDTO> firstDegreeRelative;
 	private Set<ExamDTO> CNSEvaluation;
 	private Set<MedicationDTO> medications;
+	private LocalDate patientUpdated;
 }

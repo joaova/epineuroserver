@@ -39,15 +39,15 @@ public class Patient implements Serializable {
 	private Integer gender;
 
 	@ManyToOne
-	@JoinColumn(name="color_id", nullable=false) 
+	@JoinColumn(name="color_id", nullable=true) 
 	private Color color;
 
 	@ManyToOne
-	@JoinColumn(name="civil_state_id", nullable=false) 
+	@JoinColumn(name="civil_state_id", nullable=true) 
 	private CivilState civilState;
 
 	@ManyToOne
-	@JoinColumn(name="scholarity_id", nullable=false) 
+	@JoinColumn(name="scholarity_id", nullable=true) 
 	private Scholarity scholarity;
 
 	@JsonFormat(pattern = "dd/MM/yyyy")
@@ -96,10 +96,12 @@ public class Patient implements Serializable {
 	@JoinTable(name = "patient_medication", joinColumns = @JoinColumn(name = "patient_id"), inverseJoinColumns = @JoinColumn(name = "medication_id"))
 	private Set<Medication> medications;
 
+	private LocalDate patientUpdated;
+
 	public Patient(Long id, Gender gender, Color color, CivilState civilState, Scholarity scholarity, String birthState, String birthCity, String currentCity, 
 			String job, LocalDate birthDate, LocalDate startOutpatientFollowUp, LocalDate endOutpatientFollowUp,
 			DiseaseGroup diseaseGroup, Set<Disease> comorbities, Integer smoking, Integer alcoholism, Set<Drugs> drugs, Set<Surgery> previousNeurosurgery,
-			Set<Disease> firstDegreeRelative, Set<Exam> exams, Set<Medication> medications) {
+			Set<Disease> firstDegreeRelative, Set<Exam> exams, Set<Medication> medications, LocalDate patientUpdated) {
 
 		super();
 		this.id = id;
@@ -123,6 +125,7 @@ public class Patient implements Serializable {
 		this.firstDegreeRelative = firstDegreeRelative;
 		this.exams = exams;
 		this.medications = medications;
+		this.patientUpdated = patientUpdated;
 
 	}
 
@@ -144,6 +147,14 @@ public class Patient implements Serializable {
 
 	public void setColor(Color color) {
 		this.color = color;
+	}
+
+	public LocalDate getPatientUpdated() {
+		return this.patientUpdated;
+	}
+
+	public void setPatientUpdated(LocalDate patientUpdated) {
+		this.patientUpdated = patientUpdated;
 	}
 
 	public CivilState getCivilState() {

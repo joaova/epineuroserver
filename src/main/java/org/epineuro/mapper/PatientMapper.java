@@ -73,7 +73,6 @@ public class PatientMapper {
 	
 	public PatientDTO modelToDTO(Patient patient) {
 		// String mainDisease = patient.getComorbities().iterator().next().getNome();
-		
 		PatientDTO pDTO = new PatientDTO(patient.getId(), patient.getGenderCod(), 
 				patient.getCurrentCity(), ageCalc(patient.getBirthDate(), LocalDate.now()), patient.getDiseaseGroup());
 		System.out.println(pDTO);
@@ -99,7 +98,7 @@ public class PatientMapper {
 		PatientCompleteDTO pcDTO = new PatientCompleteDTO(patient.getId(), patient.getGenderCod(), c,
 		cv, s, patient.getBirthState(), patient.getBirthCity(), patient.getCurrentCity(),
 		patient.getJob(), patient.getBirthDate(), patient.getStartOutpatientFollowUp(), patient.getEndOutpatientFollowUp(), dg, comorbities, patient.getSmoking(),
-		patient.getAlcoholism(), drugs, surgs,firstDegreeRelative, exams, medications);
+		patient.getAlcoholism(), drugs, surgs,firstDegreeRelative, exams, medications, patient.getPatientUpdated());
 		return pcDTO;
 	}
 
@@ -122,7 +121,7 @@ public class PatientMapper {
 				cv, s, patientRequest.getBirthState(), patientRequest.getBirthCity(), patientRequest.getCurrentCity(), patientRequest.getJob(),
 				patientRequest.getBirthDate(), patientRequest.getStartOutpatientFollowUp(), patientRequest.getEndOutpatientFollowUp(),
 				dg ,comorbities, patientRequest.getSmoking(), patientRequest.getAlcoholism(), 
-				drugs, surgs, firstDegreeRelative, exams, medications);
+				drugs, surgs, firstDegreeRelative, exams, medications, LocalDate.now());
 
 		System.out.println(p);
 		return p;

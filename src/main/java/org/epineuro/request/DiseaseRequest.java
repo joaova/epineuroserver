@@ -6,6 +6,5 @@ import lombok.Data;
 public class DiseaseRequest {
 	
 	private String id;
-	private String name;
 
 }

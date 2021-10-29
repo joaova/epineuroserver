@@ -24,8 +24,8 @@ public class ColorService {
 	private ColorMapper mapper;
 	
 	public List<ColorDTO> listar() {
-		List<Color> Colors = repository.findAll();
-		return Colors.stream()
+		List<Color> colors = repository.findAll();
+		return colors.stream()
 					  .map(p -> mapper.modelToDTO(p))
 					  .collect(Collectors.toList());
 	}

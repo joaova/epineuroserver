@@ -19,6 +19,6 @@ public class Exam {
 	
 	@Id
 	private Long id;
-	private String nome;
+	private String name;
 	
 }

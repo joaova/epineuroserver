@@ -17,11 +17,20 @@ public class CivilStateMapper {
 	private ModelMapper modelMapper;
 	
 	public CivilStateDTO modelToDTO(CivilState CivilState) {
-		return modelMapper.map(CivilState, CivilStateDTO.class);
+
+		if (CivilState != null) {
+			return modelMapper.map(CivilState, CivilStateDTO.class);
+
+		}
+
+		return null;
 	}
 
 	public CivilState dtoRequestToModel(CivilStateRequest CivilStateRequest) {
-		return modelMapper.map(CivilStateRequest, CivilState.class);
+		if (CivilStateRequest != null) {
+			return modelMapper.map(CivilStateRequest, CivilState.class);
+		}
+		return null;
 	}
 	
 	public Set<CivilState> comorbitiesRequestToModel(Set<CivilStateRequest> dR) {

@@ -14,11 +14,21 @@ public class ColorMapper {
 	private ModelMapper modelMapper;
 	
 	public ColorDTO modelToDTO(Color Color) {
-		return modelMapper.map(Color, ColorDTO.class);
+		if(Color != null) {
+			return modelMapper.map(Color, ColorDTO.class);
+		}
+
+		return null;
+		
 	}
 
 	public Color dtoRequestToModel(ColorRequest ColorRequest) {
-		return modelMapper.map(ColorRequest, Color.class);
+		if (ColorRequest != null) {
+			return modelMapper.map(ColorRequest, Color.class);
+		}
+
+		return null;
+		
 	}
 	
 }
