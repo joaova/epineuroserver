@@ -177,7 +177,7 @@ public class EpineuroApplication implements CommandLineRunner {
 			.build();
 			
 			User u9 = User.builder()
-					.id(8L)
+					.id(9L)
 					.name("Larissa Blás")
 					.email("lariblas11@gmail.com")
 					.password(passwordEncoder.encode("123456"))
@@ -185,8 +185,18 @@ public class EpineuroApplication implements CommandLineRunner {
 					.type(1L)
 					.cod(1L)
 			.build();
+
+			User u10 = User.builder()
+					.id(10L)
+					.name("Larissa Blás")
+					.email("eduardakunkel@gmail.com")
+					.password(passwordEncoder.encode("123456"))
+					.group(groupRepository.findById(1L).get())
+					.type(1L)
+					.cod(1L)
+			.build();
 			
-			userRepository.saveAll(Arrays.asList(u1,u2,u3,u4,u5,u6,u7,u8,u9));
+			userRepository.saveAll(Arrays.asList(u1,u2,u3,u4,u5,u6,u7,u8,u9,u10));
 			
 		}
 
