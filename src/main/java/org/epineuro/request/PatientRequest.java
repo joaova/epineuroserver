@@ -20,7 +20,7 @@ public class PatientRequest {
 	private LocalDate birthDate;
 	private LocalDate startOutpatientFollowUp;
 	private LocalDate endOutpatientFollowUp;
-	private DiseaseGroupRequest diseaseGroup;
+	private Set<DiseaseGroupRequest> diseaseGroup;
 	private Set<DiseaseRequest> comorbities;
 	private Integer smoking;
 	private Integer alcoholism;

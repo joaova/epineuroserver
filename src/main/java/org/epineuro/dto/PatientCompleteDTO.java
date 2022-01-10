@@ -21,7 +21,7 @@ public class PatientCompleteDTO {
 	private LocalDate birthDate;
 	private LocalDate startOutpatientFollowUp;
 	private LocalDate endOutpatientFollowUp;
-	private DiseaseGroupDTO diseaseGroup;
+	private Set<DiseaseGroupDTO> diseaseGroup;
 	private Set<DiseaseDTO> comorbities;
 	private Integer smoking;
 	private Integer alcoholism;

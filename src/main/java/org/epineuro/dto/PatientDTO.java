@@ -1,5 +1,7 @@
 package org.epineuro.dto;
 
+import java.util.Set;
+
 import org.epineuro.model.DiseaseGroup;
 
 import lombok.AllArgsConstructor;
@@ -14,6 +16,6 @@ public class PatientDTO {
 	private Integer gender;
 	private String currentCity;
 	private Integer age;
-	private DiseaseGroup diseaseGroup;
+	private Set<DiseaseGroup> diseaseGroup;
 	
 }

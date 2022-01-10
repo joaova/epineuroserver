@@ -88,7 +88,7 @@ public class PatientMapper {
 		Set<MedicationDTO> medications = medicationMapper.medicationToDTO(patient.getMedication());
 		Set<ExamDTO> exams = examMapper.examToDTO(patient.getExams());
 		Set<SurgeryDTO> surgs = surgMapper.SurgeryToDTO(patient.getPreviousNeurosurgery());
-		DiseaseGroupDTO dg = dGMapper.modelToDTO(patient.getDiseaseGroup());
+		Set<DiseaseGroupDTO> dg = dGMapper.DiseaseGroupToDTO(patient.getDiseaseGroup());
 		CivilStateDTO cv = cVMapper.modelToDTO(patient.getCivilState());
 		ScholarityDTO s = sMapper.modelToDTO(patient.getScholarity());
 		ColorDTO c = cMapper.modelToDTO(patient.getColor());
@@ -111,7 +111,7 @@ public class PatientMapper {
 		Set<Medication> medications = medicationMapper.medicationRequestToModel(patientRequest.getMedications());
 		Set<Exam> exams = examMapper.examRequestToModel(patientRequest.getExams());
 		Set<Surgery> surgs = surgMapper.SurgeryRequestToModel(patientRequest.getPreviousNeurosurgery());
-		DiseaseGroup dg = dGMapper.dtoRequestToModel(patientRequest.getDiseaseGroup());
+		Set<DiseaseGroup> dg = dGMapper.DiseaseGroupRequestToModel(patientRequest.getDiseaseGroup());
 		CivilState cv = cVMapper.dtoRequestToModel(patientRequest.getCivilState());
 		Scholarity s = sMapper.dtoRequestToModel(patientRequest.getScholarity());
 		Color c = cMapper.dtoRequestToModel(patientRequest.getColor());

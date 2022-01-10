@@ -61,9 +61,9 @@ public class Patient implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate endOutpatientFollowUp;
 
-	@ManyToOne
-	@JoinColumn(name="disease_group_id", nullable=false) 
-	private DiseaseGroup diseaseGroup;
+	@ManyToMany
+	@JoinTable(name = "patient_disease_group", joinColumns = @JoinColumn(name = "patient_id"), inverseJoinColumns = @JoinColumn(name = "disease_group_id"))
+	private Set<DiseaseGroup> diseaseGroup;
 
 	@ManyToMany
 	@JoinTable(name = "patient_disease", joinColumns = @JoinColumn(name = "patient_id"), inverseJoinColumns = @JoinColumn(name = "disease_id"))
@@ -100,7 +100,7 @@ public class Patient implements Serializable {
 
 	public Patient(Long id, Gender gender, Color color, CivilState civilState, Scholarity scholarity, String birthState, String birthCity, String currentCity, 
 			String job, LocalDate birthDate, LocalDate startOutpatientFollowUp, LocalDate endOutpatientFollowUp,
-			DiseaseGroup diseaseGroup, Set<Disease> comorbities, Integer smoking, Integer alcoholism, Set<Drugs> drugs, Set<Surgery> previousNeurosurgery,
+			Set<DiseaseGroup> diseaseGroup, Set<Disease> comorbities, Integer smoking, Integer alcoholism, Set<Drugs> drugs, Set<Surgery> previousNeurosurgery,
 			Set<Disease> firstDegreeRelative, Set<Exam> exams, Set<Medication> medications, LocalDate patientUpdated) {
 
 		super();
@@ -181,11 +181,11 @@ public class Patient implements Serializable {
 		this.job = job;
 	}
 
-	public DiseaseGroup getDiseaseGroup() {
+	public Set<DiseaseGroup> getDiseaseGroup() {
 		return this.diseaseGroup;
 	}
 
-	public void setDiseaseGroup(DiseaseGroup disG) {
+	public void setDiseaseGroup(Set<DiseaseGroup> disG) {
 		this.diseaseGroup = disG;
 	}
 

@@ -21,11 +21,7 @@ import lombok.NoArgsConstructor;
 public class DiseaseGroup {
 
     @Id
-    private Long id;
+	private Long id;
     private String name;
-
-    @JsonIgnore
-    @OneToMany(mappedBy="diseaseGroup")
-    private Set<Patient> patients;
 
 }
