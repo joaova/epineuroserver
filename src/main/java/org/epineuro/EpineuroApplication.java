@@ -374,7 +374,17 @@ public class EpineuroApplication implements CommandLineRunner {
 							.name("Neuro-oncologia")
 		.build();
 
-		dGRepository.saveAll(Arrays.asList(d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13,d14));
+		DiseaseGroup d15 = DiseaseGroup.builder()
+							.id(15L)
+							.name("Trauma")
+		.build();
+
+		DiseaseGroup d16 = DiseaseGroup.builder()
+							.id(16L)
+							.name("Outros")
+		.build();
+
+		dGRepository.saveAll(Arrays.asList(d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13,d14,d15,d16));
 
 		Exam e1 = Exam.builder()
 							.id(1L)
@@ -573,6 +583,18 @@ public class EpineuroApplication implements CommandLineRunner {
 		drugR.saveAll(Arrays.asList(dr1,dr2,dr3,dr4,dr5,dr6,dr7,dr8,dr9,dr10,dr11,dr12,dr13));
 
 		}
+
+		DiseaseGroup d15 = DiseaseGroup.builder()
+							.id(15L)
+							.name("Trauma")
+		.build();
+
+		DiseaseGroup d16 = DiseaseGroup.builder()
+							.id(16L)
+							.name("Outros")
+		.build();
+
+		dGRepository.saveAll(Arrays.asList(d15,d16));
 		
 	}
 

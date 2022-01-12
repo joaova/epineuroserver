@@ -62,7 +62,7 @@ public class PatientService {
 			.map(p -> mapper.modelToCompleteDTO(p))
 			.orElseThrow(() -> new PatientNotFoundException(id));
 	}
-
+ 
 	@Transactional
 	public Patient salvar(PatientRequest request) {
 		Patient p = mapper.dtoRequestToModel(request);
